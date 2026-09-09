@@ -1,0 +1,11 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "bad-source",
+  "type": "numerical",
+  "title": "Bad Source",
+  "statement": "1 + 1?",
+  "type_config": { "answer": 2 },
+  "source": {
+    "platform": "Example Platform"
+  }
+}

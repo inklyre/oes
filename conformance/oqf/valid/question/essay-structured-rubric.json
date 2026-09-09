@@ -1,0 +1,28 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "cap-theorem-essay-structured",
+  "type": "essay",
+  "title": "CAP theorem essay (structured rubric)",
+  "type_config": {
+    "grading": "manual",
+    "rubric": {
+      "criteria": [
+        {
+          "name": "Defines C/A/P correctly",
+          "points": 10
+        },
+        {
+          "name": "Explains the tradeoff under partition",
+          "points": 10
+        },
+        {
+          "name": "Gives a correctly-classified real example",
+          "points": 10
+        }
+      ]
+    }
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

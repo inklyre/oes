@@ -1,0 +1,36 @@
+{
+  "ocf_version": "0.3.0",
+  "id": "setup",
+  "title": "Setting Up Python",
+  "estimated_mins": 10,
+  "items": [
+    { "type": "article", "id": "main", "path": "articles/main" },
+    {
+      "type": "video",
+      "id": "install-python",
+      "title": "Installing Python",
+      "video_lesson_url": "https://raw.githubusercontent.com/x/y/main/install-python/video.json",
+      "content_hash": "sha256-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "type": "practice_set",
+      "id": "warmup-quiz",
+      "title": "Warm-up quiz",
+      "set_url": "https://raw.githubusercontent.com/x/y/main/set.json",
+      "required": false
+    },
+    { "type": "practice_set", "id": "co-located-quiz", "path": "practice-sets/co-located-quiz" },
+    {
+      "type": "resource",
+      "id": "install-cheatsheet",
+      "title": "Installation Cheat Sheet",
+      "resource_url": "https://raw.githubusercontent.com/x/y/main/cheatsheet/resource.json",
+      "required": false
+    }
+  ],
+  "related": [
+    { "type": "link", "title": "Official Python downloads", "url": "https://www.python.org/downloads/" },
+    { "type": "video", "title": "Python in 100 Seconds", "url": "https://www.youtube.com/watch?v=x7X9w_GIm1s", "note": "A quick, external recap if you want a different explanation." },
+    { "type": "book", "title": "Automate the Boring Stuff with Python", "url": "https://automatetheboringstuff.com/" }
+  ]
+}

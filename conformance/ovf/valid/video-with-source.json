@@ -1,0 +1,12 @@
+{
+  "ovf_version": "0.1.0",
+  "id": "imported-video",
+  "title": "Imported Video",
+  "video_url": "https://www.youtube.com/watch?v=example",
+  "source": {
+    "url": "https://www.youtube.com/watch?v=example",
+    "platform": "YouTube",
+    "license": "Standard YouTube License",
+    "retrieved_at": "2026-09-06"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "imported-mcq",
+  "type": "mcq",
+  "title": "Imported MCQ",
+  "statement": "What is 2 + 2?",
+  "type_config": {
+    "options": [
+      { "id": "a", "content": "3" },
+      { "id": "b", "content": "4" }
+    ],
+    "answer": "b"
+  },
+  "source": {
+    "url": "https://example.edu/exercises/arithmetic-1",
+    "platform": "Example Practice Platform",
+    "retrieved_at": "2026-09-06"
+  }
+}

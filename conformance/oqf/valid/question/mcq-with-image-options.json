@@ -1,0 +1,22 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "which-diagram-is-a-tree",
+  "type": "mcq",
+  "title": "Which diagram shows a valid binary tree?",
+  "type_config": {
+    "options": [
+      {
+        "id": "a",
+        "content": "![A rooted diagram where each node has at most two children](assets/option-a.png)"
+      },
+      {
+        "id": "b",
+        "content": "Before the fix:\n\n![A diagram with a cycle between three nodes](assets/option-b-before.png)\n\nAfter the fix:\n\n![The same diagram with the cycle removed](assets/option-b-after.png)"
+      }
+    ],
+    "answer": "a"
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

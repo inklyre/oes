@@ -1,0 +1,6 @@
+{
+  "opf_version": "0.2.0",
+  "id": "quiz",
+  "title": "Quiz",
+  "questions": [{ "id": "sorting-stable", "points": 15 }]
+}

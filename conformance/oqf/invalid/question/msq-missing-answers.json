@@ -1,0 +1,19 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "sorting-stable",
+  "type": "msq",
+  "title": "Which are stable?",
+  "type_config": {
+    "options": [
+      {
+        "id": "a",
+        "content": "Merge"
+      },
+      {
+        "id": "b",
+        "content": "Quick"
+      }
+    ]
+  },
+  "statement": "Placeholder statement text."
+}

@@ -1,0 +1,22 @@
+{
+  "ovf_version": "0.1.0",
+  "id": "install-python",
+  "title": "Installing Python (Windows/Mac/Linux)",
+  "video_url": "https://example.com/videos/python-setup",
+  "duration_mins": 4,
+  "chapters": [
+    { "label": "Downloading the installer", "time_seconds": 0 },
+    { "label": "Running the installer", "time_seconds": 90 }
+  ],
+  "captions": [
+    { "language": "en", "path": "captions/en.vtt" },
+    { "language": "es", "url": "https://example.com/videos/python-setup/es.vtt" }
+  ],
+  "references": [
+    "https://www.python.org/downloads/"
+  ],
+  "related": [
+    { "type": "video", "title": "A different walkthrough on macOS", "url": "https://www.youtube.com/watch?v=abc123", "note": "If this video's pace doesn't work for you." },
+    { "type": "video", "title": "Next lesson: Your First Script", "video_lesson_url": "https://raw.githubusercontent.com/x/y/main/first-script/video.json" }
+  ]
+}

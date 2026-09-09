@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oes.dev/schemas/ovf/v0.1.0/video.schema.json",
+  "title": "OVF Video Lesson",
+  "description": "Schema for video.json, an individual video lesson in the Open Video Format (OVF), version 0.1.0. video_url points at wherever the video is actually hosted (YouTube, Vimeo, a self-hosted CDN, etc.) and is always required as the canonical source. A video lesson MAY additionally carry a local_path to a bundled copy of the file, for fully offline/portable packages, when downloadable permits it.",
+  "type": "object",
+  "required": ["ovf_version", "id", "title", "video_url"],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional. Points an editor (e.g. VS Code) at this document's JSON Schema for inline validation/autocomplete. A JSON-tooling convention, not part of the OES content model — an OES parser ignores it like any other unrecognized field."
+    },
+    "ovf_version": {
+      "type": "string",
+      "pattern": "^0\\.1\\.\\d+$",
+      "description": "Any 0.1.x patch release of OVF — see the Versioning & Conformance policy for what's allowed to change in a patch."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Kebab-case. Must match this video lesson's folder name when co-located (referenced via a `path`)."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "authors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "GitHub usernames of the authors. A video lesson can be hosted and reused independently of any lesson, so it needs its own attribution."
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier, e.g. \"CC-BY-4.0\". This describes the video lesson's own metadata/transcript; it does not by itself grant redistribution rights to the underlying video file — see `downloadable`."
+    },
+    "video_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Where the actual video is hosted/embedded. OVF describes metadata about the video, not the video file itself. MAY be a single video file, or an adaptive-streaming manifest (HLS .m3u8, DASH .mpd) — OVF takes no position on which; a consumer plays whatever it resolves to."
+    },
+    "duration_mins": {
+      "type": "number",
+      "minimum": 0
+    },
+    "downloadable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the file at video_url may be downloaded and redistributed as part of an exported/portable OES package. Only set true when you hold the rights to redistribute the video file itself (self-hosted or appropriately licensed content) — never for an embed of third-party-hosted video (e.g. a YouTube URL) where mirroring the file would violate that platform's terms. Consuming apps must treat the absence of this field, or a value of false, as \"do not download and bundle this file\"."
+    },
+    "local_path": {
+      "type": "string",
+      "pattern": "^[^/]+\\.(mp4|webm|mov|mkv)$",
+      "description": "Filename (no subdirectories), from this video.json's own folder, to a locally-bundled copy of the video file — present only when an app has already downloaded it (permitted by `downloadable: true`) and included it in this package for offline playback. Author-written video.json files normally omit this entirely; it's populated by tooling, not hand-authored, and is not meant to be committed to the authoring git repo — see the Offline & Portable Packages guidance for the recommended .gitignore pattern this fixed extension set enables. A consumer that finds the file at this path should prefer playing it over fetching video_url, and fall back to video_url when it's absent or missing."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "published", "deprecated"],
+      "description": "Content lifecycle stage. Absent is equivalent to \"published\" — this field exists for a consumer that wants to hide draft/deprecated content or an author's own tooling, not to gate access by itself."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "language": {
+      "type": "string",
+      "description": "Primary spoken language, BCP 47 tag."
+    },
+    "chapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["label", "time_seconds"],
+        "properties": {
+          "label": { "type": "string" },
+          "time_seconds": { "type": "number", "minimum": 0 }
+        }
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/reference" },
+      "description": "Cited sources — papers, books, or sites this video's content is based on. Each entry is either a bare URL (the simple case) or a richer object — needed for a source with no single URL, like a print book (identified by isbn) or a paper (identified by doi)."
+    },
+    "related": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/related_item" },
+      "description": "Suggested material for a learner who wants to go further after this specific video — a related video (this video's own \"watch next\"), a recommended book, another course. Distinct from references, which documents this video's own sources rather than suggesting where to go next."
+    },
+    "source": { "$ref": "#/definitions/source" },
+    "captions": {
+      "type": "array",
+      "description": "Timed closed captions/subtitles — distinct from transcript.md, which is untimed prose. Zero or more caption tracks, e.g. one per language.",
+      "items": {
+        "type": "object",
+        "required": ["language"],
+        "additionalProperties": true,
+        "oneOf": [
+          { "required": ["path"] },
+          { "required": ["url"] }
+        ],
+        "properties": {
+          "language": {
+            "type": "string",
+            "description": "BCP 47 tag for this caption track's language, e.g. \"en\", \"es\"."
+          },
+          "path": {
+            "type": "string",
+            "description": "Path, relative to this video.json's own folder, to a co-located .vtt or .srt file. Mutually exclusive with url."
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Absolute URL to a .vtt or .srt file hosted separately. Mutually exclusive with path."
+          },
+          "content_hash": {
+            "type": "string",
+            "pattern": "^sha256-[A-Fa-f0-9]{64}$",
+            "description": "Optional sha256 pin, meaningful mainly alongside url."
+          }
+        }
+      }
+    }
+  },
+  "patternProperties": {
+    "^x_[a-z0-9_]+$": {}
+  },
+  "definitions": {
+    "reference": {
+      "description": "A cited source or further-reading pointer.",
+      "oneOf": [
+        { "type": "string", "format": "uri", "description": "Shorthand for a source that's just a URL, nothing more." },
+        {
+          "type": "object",
+          "required": ["title"],
+          "additionalProperties": true,
+          "properties": {
+            "title": { "type": "string", "minLength": 1 },
+            "type": {
+              "type": "string",
+              "enum": ["article", "book", "paper", "video", "website", "dataset", "other"],
+              "default": "website"
+            },
+            "authors": { "type": "array", "items": { "type": "string" } },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Where to find this source online. Omit entirely for a source with no online location, e.g. a print-only book — isbn/publisher/year identify it instead."
+            },
+            "isbn": {
+              "type": "string",
+              "description": "For type: book. ISBN-10 or ISBN-13, digits and optional hyphens."
+            },
+            "doi": {
+              "type": "string",
+              "description": "For type: paper. Digital Object Identifier, e.g. \"10.1000/xyz123\"."
+            },
+            "publisher": { "type": "string" },
+            "year": { "type": "integer" },
+            "note": {
+              "type": "string",
+              "description": "Why this source is included, e.g. \"primary source for the historical claims in section 2\"."
+            }
+          }
+        }
+      ]
+    },
+    "related_item": {
+      "description": "A suggested piece of material for the learner to explore further — distinct from `references`, which documents this content's own sources. Either an OES-native pointer (`path` or one of the `*_url` fields, the same idiom used by every other cross-reference in OES, so a consuming app can fetch it and render it richly — real duration, thumbnail, etc.) or a fully external pointer (a bare `url`) for anything not itself modeled as OES content, e.g. a YouTube video or a book's product page.",
+      "type": "object",
+      "required": ["title", "type"],
+      "additionalProperties": true,
+      "oneOf": [
+        { "required": ["path"] },
+        { "required": ["video_lesson_url"] },
+        { "required": ["article_url"] },
+        { "required": ["set_url"] },
+        { "required": ["course_url"] },
+        { "required": ["resource_url"] },
+        { "required": ["url"] }
+      ],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "type": {
+          "type": "string",
+          "enum": ["video", "article", "book", "course", "practice_set", "resource", "file", "link", "other"],
+          "description": "What kind of thing this is, independent of how it's addressed below."
+        },
+        "path": { "type": "string", "description": "Path to co-located OES content (a video.json, article.json, set.json, course.json, or resource.json) this entry points at." },
+        "video_lesson_url": { "type": "string", "format": "uri" },
+        "article_url": { "type": "string", "format": "uri" },
+        "set_url": { "type": "string", "format": "uri" },
+        "course_url": { "type": "string", "format": "uri" },
+        "resource_url": { "type": "string", "format": "uri" },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "For material not modeled as OES content at all — e.g. a YouTube video, an external article, a book's product page."
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^sha256-[A-Fa-f0-9]{64}$",
+          "description": "Optional sha256 pin, meaningful only alongside one of the *_url fields."
+        },
+        "note": {
+          "type": "string",
+          "description": "Why this is suggested, e.g. \"if you want a deeper dive into the underlying math\"."
+        }
+      }
+    },
+    "source": {
+      "description": "Where this content was originally sourced or adapted from, if it wasn't authored directly for OES — e.g. produced by an importer against another platform's content. Entirely optional; omit for content authored directly. Distinct from this document's own top-level `license`, which describes this OES document's license, not what it was adapted from — the original may be more restrictive (or simply different) and belongs in `source.license` instead. For a video specifically, also distinct from `downloadable`/`local_path`: `source` records provenance, it never by itself grants redistribution rights to the underlying video file.",
+      "type": "object",
+      "required": ["url"],
+      "additionalProperties": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The original content's own URL — a video's page, an article's URL, a course's syllabus page, etc."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Free-text label for the originating platform or site, e.g. \"Khan Academy\", \"MIT OpenCourseWare\", \"YouTube\". Deliberately not an enum — OES doesn't hard-code or endorse any specific platform; any importer fills in whatever's accurate."
+        },
+        "license": {
+          "type": "string",
+          "description": "The ORIGINAL content's license or terms of use at the source. Free text, not constrained to SPDX like this document's own `license` field — many platforms' terms of use aren't expressible as a single SPDX identifier."
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date",
+          "description": "When this content was fetched/adapted from the source — provenance, and a signal for how stale this copy might be."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-text context an importer or author wants to record — adaptation details, attribution requirements, anything not covered by the fields above."
+        }
+      }
+    }
+  }
+}

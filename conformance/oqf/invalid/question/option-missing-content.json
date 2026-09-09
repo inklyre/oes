@@ -1,0 +1,19 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "bad-option",
+  "type": "mcq",
+  "title": "Bad option example",
+  "type_config": {
+    "options": [
+      {
+        "id": "a"
+      },
+      {
+        "id": "b",
+        "content": "B"
+      }
+    ],
+    "answer": "b"
+  },
+  "statement": "Placeholder statement text."
+}

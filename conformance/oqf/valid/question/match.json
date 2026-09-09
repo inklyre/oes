@@ -1,0 +1,26 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "complexity-match",
+  "type": "match",
+  "title": "Match algorithm to complexity",
+  "difficulty": "medium",
+  "type_config": {
+    "left": [
+      { "id": "l1", "content": "O(1)" },
+      { "id": "l2", "content": "O(log n)" }
+    ],
+    "right": [
+      { "id": "r1", "content": "Hash table lookup" },
+      { "id": "r2", "content": "Binary search" },
+      { "id": "r3", "content": "Linear scan (distractor)" }
+    ],
+    "pairs": [
+      { "left_id": "l1", "right_id": "r1" },
+      { "left_id": "l2", "right_id": "r2" }
+    ],
+    "shuffle": true
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "sorting-stable-partial-credit",
+  "type": "msq",
+  "title": "Which sorting algorithms are stable?",
+  "statement": "Select every sorting algorithm below that is stable.",
+  "type_config": {
+    "options": [
+      { "id": "a", "content": "Merge sort", "score": 0.5 },
+      { "id": "b", "content": "Quick sort", "score": 0 },
+      { "id": "c", "content": "Insertion sort", "score": 0.5 },
+      { "id": "d", "content": "Heap sort", "score": -1 }
+    ],
+    "answers": ["a", "c"]
+  }
+}

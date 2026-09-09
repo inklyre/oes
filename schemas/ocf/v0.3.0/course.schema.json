@@ -1,0 +1,280 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oes.dev/schemas/ocf/v0.3.0/course.schema.json",
+  "title": "OCF",
+  "description": "Schema for the three Open Course Format (OCF) document types, version 0.3.0: course.json, module.json, and lesson.json.",
+  "oneOf": [
+    { "$ref": "#/definitions/course" },
+    { "$ref": "#/definitions/module" },
+    { "$ref": "#/definitions/lesson" }
+  ],
+  "definitions": {
+    "content_hash": {
+      "type": "string",
+      "pattern": "^sha256-[A-Fa-f0-9]{64}$",
+      "description": "Optional sha256 hash of the referenced document, formatted \"sha256-{hex}\". Lets a consumer detect when an externally-referenced document has changed since this reference was last pinned (integrity, caching, reproducible progress tracking), the same way Subresource Integrity works on the web. Omit for co-located `path` references, already versioned by this repo's own history."
+    },
+    "course": {
+      "type": "object",
+      "required": ["ocf_version", "id", "title", "modules"],
+      "additionalProperties": true,
+      "properties": {
+        "$schema": { "type": "string", "description": "Optional. Points an editor (e.g. VS Code) at this document's JSON Schema for inline validation/autocomplete. A JSON-tooling convention, not part of the OES content model — an OES parser ignores it like any other unrecognized field." },
+        "ocf_version": { "type": "string", "pattern": "^0\\.3\\.\\d+$", "description": "Any 0.3.x patch release of OCF — see the Versioning & Conformance policy for what's allowed to change in a patch." },
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "authors": { "type": "array", "items": { "type": "string" } },
+        "license": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "published", "deprecated"], "description": "Content lifecycle stage. Absent is equivalent to \"published\" — this field exists for a consumer that wants to hide draft/deprecated content or a course author's own tooling, not to gate access by itself." },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "language": { "type": "string" },
+        "level": { "type": "string", "enum": ["beginner", "intermediate", "advanced"] },
+        "estimated_mins": { "type": "number", "minimum": 0, "description": "Same unit as module.estimated_mins and lesson.estimated_mins, for trivial roll-up across all three levels." },
+        "outcomes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What a learner will be able to do after completing this course — distinct from description, which is a general summary. Each entry is one outcome statement, e.g. \"Write and deploy a basic REST API in Python.\" Purely descriptive metadata for display; not machine-checked against any content."
+        },
+        "modules": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Ordered list; array order determines the course's module sequence.",
+          "items": {
+            "type": "object",
+            "required": ["id", "path"],
+            "additionalProperties": true,
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "path": { "type": "string" }
+            }
+          }
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "course_url"],
+            "additionalProperties": true,
+            "properties": {
+              "id": { "type": "string" },
+              "course_url": { "type": "string", "format": "uri" },
+              "content_hash": { "$ref": "#/definitions/content_hash" }
+            }
+          }
+        },
+        "source": { "$ref": "#/definitions/source" }
+      },
+      "patternProperties": { "^x_[a-z0-9_]+$": {} }
+    },
+    "module": {
+      "type": "object",
+      "required": ["ocf_version", "id", "title", "lessons"],
+      "additionalProperties": true,
+      "properties": {
+        "$schema": { "type": "string", "description": "Optional. Points an editor (e.g. VS Code) at this document's JSON Schema for inline validation/autocomplete. A JSON-tooling convention, not part of the OES content model — an OES parser ignores it like any other unrecognized field." },
+        "ocf_version": { "type": "string", "pattern": "^0\\.3\\.\\d+$", "description": "Any 0.3.x patch release of OCF — see the Versioning & Conformance policy for what's allowed to change in a patch." },
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "estimated_mins": { "type": "number", "minimum": 0, "description": "Same unit as lesson.estimated_mins, so a consumer can sum lessons or use the module's own figure interchangeably." },
+        "outcomes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "What a learner will be able to do after completing this module — same convention as course.outcomes, at module granularity."
+        },
+        "lessons": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Ordered list; array order determines the module's lesson sequence.",
+          "items": {
+            "type": "object",
+            "required": ["id", "path"],
+            "additionalProperties": true,
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+              "path": { "type": "string" }
+            }
+          }
+        },
+        "source": { "$ref": "#/definitions/source" }
+      },
+      "patternProperties": { "^x_[a-z0-9_]+$": {} }
+    },
+    "lesson": {
+      "type": "object",
+      "required": ["ocf_version", "id", "title"],
+      "additionalProperties": true,
+      "properties": {
+        "$schema": { "type": "string", "description": "Optional. Points an editor (e.g. VS Code) at this document's JSON Schema for inline validation/autocomplete. A JSON-tooling convention, not part of the OES content model — an OES parser ignores it like any other unrecognized field." },
+        "ocf_version": { "type": "string", "pattern": "^0\\.3\\.\\d+$", "description": "Any 0.3.x patch release of OCF — see the Versioning & Conformance policy for what's allowed to change in a patch." },
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+        "title": { "type": "string", "minLength": 1 },
+        "description": { "type": "string" },
+        "estimated_mins": { "type": "number", "minimum": 0 },
+        "items": {
+          "type": "array",
+          "description": "Ordered list — the actual sequence a learner goes through: a video, then an article, then a practice set, in whatever order the array says. This is a lesson's entire content; there is no separate content.md on the lesson itself. Each entry is discriminated by `type`.",
+          "items": { "$ref": "#/definitions/lesson_item" }
+        },
+        "related": {
+          "type": "array",
+          "description": "Suggested material for a learner who wants to go further after this lesson — a related video, a recommended book, a downloadable file, another course. Written and video content that's actually part of this lesson belongs in items[] instead; this is for material the lesson merely points at.",
+          "items": { "$ref": "#/definitions/related_item" }
+        },
+        "source": { "$ref": "#/definitions/source" }
+      },
+      "patternProperties": { "^x_[a-z0-9_]+$": {} }
+    },
+    "lesson_item": {
+      "description": "One item in a lesson's ordered sequence — a video, an article, a practice set, or a reference document (ORF resource). `type` discriminates which, and in turn which of the address fields below (`path` is shared; the `*_url` field name is type-specific) is expected.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["type", "id"],
+          "additionalProperties": true,
+          "oneOf": [
+            { "required": ["path"] },
+            { "required": ["article_url"] }
+          ],
+          "properties": {
+            "type": { "const": "article" },
+            "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+            "title": { "type": "string" },
+            "path": { "type": "string", "description": "Path, relative to lesson.json, to a co-located article." },
+            "article_url": { "type": "string", "format": "uri", "description": "Full URL to an article.json hosted in a separate repo." },
+            "content_hash": { "$ref": "#/definitions/content_hash" },
+            "required": { "type": "boolean", "default": false }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "id"],
+          "additionalProperties": true,
+          "oneOf": [
+            { "required": ["path"] },
+            { "required": ["video_lesson_url"] }
+          ],
+          "properties": {
+            "type": { "const": "video" },
+            "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+            "title": { "type": "string" },
+            "path": { "type": "string", "description": "Path, relative to lesson.json, to a co-located video lesson." },
+            "video_lesson_url": { "type": "string", "format": "uri", "description": "Full URL to a video.json hosted in a separate repo." },
+            "content_hash": { "$ref": "#/definitions/content_hash" },
+            "required": { "type": "boolean", "default": false }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "id"],
+          "additionalProperties": true,
+          "oneOf": [
+            { "required": ["path"] },
+            { "required": ["set_url"] }
+          ],
+          "properties": {
+            "type": { "const": "practice_set" },
+            "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+            "title": { "type": "string" },
+            "path": { "type": "string", "description": "Path, relative to lesson.json, to a co-located OPF set's set.json." },
+            "set_url": { "type": "string", "format": "uri", "description": "Full URL to a set.json hosted in a separate repo." },
+            "content_hash": { "$ref": "#/definitions/content_hash" },
+            "required": { "type": "boolean", "default": false }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["type", "id"],
+          "additionalProperties": true,
+          "oneOf": [
+            { "required": ["path"] },
+            { "required": ["resource_url"] }
+          ],
+          "properties": {
+            "type": { "const": "resource" },
+            "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+            "title": { "type": "string" },
+            "path": { "type": "string", "description": "Path, relative to lesson.json, to a co-located ORF resource's resource.json." },
+            "resource_url": { "type": "string", "format": "uri", "description": "Full URL to a resource.json hosted in a separate repo." },
+            "content_hash": { "$ref": "#/definitions/content_hash" },
+            "required": { "type": "boolean", "default": false }
+          }
+        }
+      ]
+    },
+    "related_item": {
+      "description": "A suggested piece of material for the learner to explore further — distinct from `references`, which documents this content's own sources. Either an OES-native pointer (`path` or one of the `*_url` fields, the same idiom used by every other cross-reference in OES, so a consuming app can fetch it and render it richly — real duration, thumbnail, etc.) or a fully external pointer (a bare `url`) for anything not itself modeled as OES content, e.g. a YouTube video or a book's product page.",
+      "type": "object",
+      "required": ["title", "type"],
+      "additionalProperties": true,
+      "oneOf": [
+        { "required": ["path"] },
+        { "required": ["video_lesson_url"] },
+        { "required": ["article_url"] },
+        { "required": ["set_url"] },
+        { "required": ["course_url"] },
+        { "required": ["resource_url"] },
+        { "required": ["url"] }
+      ],
+      "properties": {
+        "title": { "type": "string", "minLength": 1 },
+        "type": {
+          "type": "string",
+          "enum": ["video", "article", "book", "course", "practice_set", "resource", "file", "link", "other"],
+          "description": "What kind of thing this is, independent of how it's addressed below."
+        },
+        "path": { "type": "string", "description": "Path to co-located OES content (a video.json, article.json, set.json, course.json, or resource.json) this entry points at." },
+        "video_lesson_url": { "type": "string", "format": "uri" },
+        "article_url": { "type": "string", "format": "uri" },
+        "set_url": { "type": "string", "format": "uri" },
+        "course_url": { "type": "string", "format": "uri" },
+        "resource_url": { "type": "string", "format": "uri" },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "For material not modeled as OES content at all — e.g. a YouTube video, an external article, a book's product page."
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^sha256-[A-Fa-f0-9]{64}$",
+          "description": "Optional sha256 pin, meaningful only alongside one of the *_url fields."
+        },
+        "note": {
+          "type": "string",
+          "description": "Why this is suggested, e.g. \"if you want a deeper dive into the underlying math\"."
+        }
+      }
+    },
+    "source": {
+      "description": "Where this content was originally sourced or adapted from, if it wasn't authored directly for OES — e.g. produced by an importer against another platform's course structure. Entirely optional; omit for content authored directly. Distinct from this document's own top-level `license`, where present — that describes this OES document's license, not what it was adapted from, and the original may be more restrictive (or simply different) — see `source.license` instead.",
+      "type": "object",
+      "required": ["url"],
+      "additionalProperties": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The original content's own URL — a course's syllabus page, a lecture's page, etc."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Free-text label for the originating platform or site, e.g. \"Khan Academy\", \"MIT OpenCourseWare\". Deliberately not an enum — OES doesn't hard-code or endorse any specific platform; any importer fills in whatever's accurate."
+        },
+        "license": {
+          "type": "string",
+          "description": "The ORIGINAL content's license or terms of use at the source. Free text, not constrained to SPDX like this document's own `license` field — many platforms' terms of use aren't expressible as a single SPDX identifier."
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date",
+          "description": "When this content was fetched/adapted from the source — provenance, and a signal for how stale this copy might be."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-text context an importer or author wants to record — adaptation details, attribution requirements, anything not covered by the fields above."
+        }
+      }
+    }
+  }
+}

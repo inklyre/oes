@@ -1,0 +1,15 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "why-hash-tables",
+  "type": "short_answer",
+  "title": "Why does a hash table give O(1) average lookup?",
+  "difficulty": "medium",
+  "type_config": {
+    "max_words": 100,
+    "grading": "manual",
+    "rubric": "Should mention time/space tradeoff and amortized analysis."
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

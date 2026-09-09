@@ -1,0 +1,16 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "quicksort-steps-secure",
+  "type": "order",
+  "title": "Order the steps of Quicksort (graded)",
+  "statement": "Arrange the following steps into the order Quicksort actually performs them.",
+  "answer_key": { "file": "answer-key.json" },
+  "type_config": {
+    "items": [
+      { "id": "s1", "content": "Choose a pivot element" },
+      { "id": "s2", "content": "Partition the array around the pivot" },
+      { "id": "s3", "content": "Recursively sort the left partition" },
+      { "id": "s4", "content": "Recursively sort the right partition" }
+    ]
+  }
+}

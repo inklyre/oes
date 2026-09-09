@@ -1,0 +1,8 @@
+{
+  "ovf_version": "0.1.0",
+  "id": "intro-recap",
+  "title": "Course Recap",
+  "video_url": "https://cdn.example.com/videos/intro-recap.mp4",
+  "downloadable": true,
+  "local_path": "media/video.mp4"
+}

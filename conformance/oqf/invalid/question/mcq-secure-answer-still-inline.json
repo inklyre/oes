@@ -1,0 +1,15 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "big-o-lookup-secure",
+  "type": "mcq",
+  "title": "Hash table average lookup time (graded)",
+  "statement": "What's the average-case time complexity of a lookup in a well-implemented hash table?",
+  "answer_key": { "file": "answer-key.json" },
+  "type_config": {
+    "options": [
+      { "id": "a", "content": "O(1)" },
+      { "id": "b", "content": "O(log n)" }
+    ],
+    "answer": "a"
+  }
+}

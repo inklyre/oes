@@ -1,0 +1,11 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "cap-theorem",
+  "type": "essay",
+  "title": "CAP theorem",
+  "type_config": {
+    "grading": "manual",
+    "max_words": "1000"
+  },
+  "statement": "Placeholder statement text."
+}

@@ -1,0 +1,59 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "two-sum",
+  "type": "code",
+  "title": "Two Sum",
+  "difficulty": "easy",
+  "type_config": {
+    "languages": [
+      "python",
+      "javascript"
+    ],
+    "starter_code": {
+      "python": "def two_sum(nums, target):\n    pass\n"
+    },
+    "test_cases": [
+      {
+        "id": "tc1",
+        "input": {
+          "nums": [
+            2,
+            7,
+            11,
+            15
+          ],
+          "target": 9
+        },
+        "expected": [
+          0,
+          1
+        ],
+        "is_hidden": false
+      },
+      {
+        "id": "tc2",
+        "input": {
+          "nums": [
+            3,
+            2,
+            4
+          ],
+          "target": 6
+        },
+        "expected": [
+          1,
+          2
+        ],
+        "is_hidden": true,
+        "time_limit_ms": 5000
+      }
+    ],
+    "time_limit_ms": 1000,
+    "memory_limit_mb": 256,
+    "time_complexity": "O(n)",
+    "space_complexity": "O(n)"
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

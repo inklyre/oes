@@ -1,0 +1,14 @@
+{
+  "ocf_version": "0.3.0",
+  "id": "imported-course",
+  "title": "Imported Course",
+  "license": "CC-BY-NC-SA-4.0",
+  "modules": [{ "id": "m1", "path": "modules/m1" }],
+  "source": {
+    "url": "https://example.edu/courses/6.006",
+    "platform": "Example OpenCourseWare",
+    "license": "CC-BY-NC-SA-4.0",
+    "retrieved_at": "2026-09-06",
+    "note": "Structure adapted from the original syllabus."
+  }
+}

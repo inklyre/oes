@@ -1,0 +1,10 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "capstone-project",
+  "type": "submission",
+  "title": "Build and deploy a small REST API",
+  "statement": "Submit a link to your deployed API.",
+  "type_config": {
+    "grading": "manual"
+  }
+}

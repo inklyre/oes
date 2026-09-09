@@ -1,0 +1,9 @@
+{
+  "ovf_version": "0.1.0",
+  "id": "install-python",
+  "title": "Installing Python (Windows/Mac/Linux)",
+  "video_url": "https://example.com/videos/python-setup",
+  "captions": [
+    { "path": "captions/en.vtt" }
+  ]
+}

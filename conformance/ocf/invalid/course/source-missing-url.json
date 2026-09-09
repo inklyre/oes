@@ -1,0 +1,9 @@
+{
+  "ocf_version": "0.3.0",
+  "id": "bad-source",
+  "title": "Bad Source",
+  "modules": [{ "id": "m1", "path": "modules/m1" }],
+  "source": {
+    "platform": "Example Platform"
+  }
+}

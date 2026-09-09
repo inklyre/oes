@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oes.dev/schemas/opf/v0.1.0/set.schema.json",
+  "title": "OPF Set",
+  "description": "Schema for set.json, the entry point of an Open Practice Format (OPF) problem set, version 0.1.0.",
+  "type": "object",
+  "required": ["opf_version", "id", "title", "problems"],
+  "additionalProperties": true,
+  "properties": {
+    "opf_version": {
+      "type": "string",
+      "const": "0.1.0",
+      "description": "The OPF specification version this file conforms to."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Kebab-case, unique identifier for this set."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "authors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "GitHub usernames of the set's authors."
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier, e.g. \"CC-BY-4.0\"."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "language": {
+      "type": "string",
+      "description": "BCP 47 language tag, e.g. \"en\"."
+    },
+    "problems": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "path"],
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "description": "Must match the problem's folder name."
+          },
+          "path": {
+            "type": "string",
+            "description": "Path, relative to set.json, to the problem's folder."
+          }
+        }
+      }
+    }
+  },
+  "patternProperties": {
+    "^x_[a-z0-9_]+$": {}
+  }
+}

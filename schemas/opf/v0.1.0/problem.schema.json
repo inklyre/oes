@@ -1,0 +1,380 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oes.dev/schemas/opf/v0.1.0/problem.schema.json",
+  "title": "OPF Problem",
+  "description": "Schema for problem.json, an individual problem within an Open Practice Format (OPF) set, version 0.1.0.",
+  "type": "object",
+  "required": ["opf_version", "id", "type", "title", "type_config"],
+  "additionalProperties": true,
+  "properties": {
+    "opf_version": {
+      "type": "string",
+      "const": "0.1.0",
+      "description": "Must match the opf_version of the parent set.json."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Kebab-case, must match this problem's folder name."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "mcq",
+        "msq",
+        "fill_blank",
+        "code",
+        "match",
+        "order",
+        "numerical",
+        "short_answer",
+        "essay",
+        "diagram"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["easy", "medium", "hard"]
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "topics": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "companies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "points": {
+      "type": "number",
+      "default": 10,
+      "minimum": 0
+    },
+    "time_limit_mins": {
+      "type": "number",
+      "minimum": 0
+    },
+    "hints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Ordered least to most revealing."
+    },
+    "explanation": {
+      "type": "string",
+      "description": "Shown to the learner after they attempt the problem."
+    },
+    "references": {
+      "type": "array",
+      "items": { "type": "string", "format": "uri" }
+    },
+    "type_config": {
+      "type": "object",
+      "description": "Type-specific configuration. Shape depends on the value of `type`; see the if/then blocks below."
+    }
+  },
+  "patternProperties": {
+    "^x_[a-z0-9_]+$": {}
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "type": { "const": "mcq" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["options", "answer"],
+            "additionalProperties": true,
+            "properties": {
+              "options": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "text"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "text": { "type": "string" }
+                  }
+                }
+              },
+              "answer": {
+                "type": "string",
+                "description": "Must match one option's id."
+              },
+              "shuffle_options": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "msq" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["options", "answers"],
+            "additionalProperties": true,
+            "properties": {
+              "options": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "text"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "text": { "type": "string" }
+                  }
+                }
+              },
+              "answers": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string" },
+                "description": "Each entry must match one option's id."
+              },
+              "shuffle_options": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "fill_blank" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["blanks"],
+            "additionalProperties": true,
+            "properties": {
+              "blanks": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "answer", "type"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "answer": { "type": "string" },
+                    "type": {
+                      "type": "string",
+                      "enum": ["text", "expression", "number"]
+                    },
+                    "case_sensitive": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "code" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["languages", "test_cases"],
+            "additionalProperties": true,
+            "properties": {
+              "languages": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string" }
+              },
+              "starter_code": {
+                "type": "object",
+                "description": "Map of language name to starter code string.",
+                "additionalProperties": { "type": "string" }
+              },
+              "test_cases": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "input", "expected"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "input": {},
+                    "expected": {},
+                    "is_hidden": { "type": "boolean", "default": false }
+                  }
+                }
+              },
+              "solutions": {
+                "type": "object",
+                "description": "Map of language name to a reference solution string.",
+                "additionalProperties": { "type": "string" }
+              },
+              "time_complexity": { "type": "string" },
+              "space_complexity": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "match" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["pairs"],
+            "additionalProperties": true,
+            "properties": {
+              "pairs": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "object",
+                  "required": ["left", "right"],
+                  "properties": {
+                    "left": { "type": "string" },
+                    "right": { "type": "string" }
+                  }
+                }
+              },
+              "shuffle": { "type": "boolean", "default": true }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "order" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["items", "correct_order"],
+            "additionalProperties": true,
+            "properties": {
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": { "type": "string" }
+              },
+              "correct_order": {
+                "type": "array",
+                "minItems": 2,
+                "items": { "type": "integer", "minimum": 0 },
+                "description": "Zero-based indices into `items`, describing the correct sequence."
+              },
+              "shuffle": { "type": "boolean", "default": true }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "numerical" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["answer"],
+            "additionalProperties": true,
+            "properties": {
+              "answer": { "type": "number" },
+              "tolerance": { "type": "number", "minimum": 0, "default": 0 },
+              "unit": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "short_answer" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["grading"],
+            "additionalProperties": true,
+            "properties": {
+              "max_words": { "type": "integer", "minimum": 1 },
+              "grading": { "type": "string", "enum": ["manual"] },
+              "rubric": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "essay" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["grading"],
+            "additionalProperties": true,
+            "properties": {
+              "min_words": { "type": "integer", "minimum": 1 },
+              "max_words": { "type": "integer", "minimum": 1 },
+              "grading": { "type": "string", "enum": ["manual"] },
+              "rubric": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": { "properties": { "type": { "const": "diagram" } } },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": ["image", "labels"],
+            "additionalProperties": true,
+            "properties": {
+              "image": {
+                "type": "string",
+                "description": "Path, relative to the problem folder, to the image asset."
+              },
+              "labels": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": ["id", "answer", "position"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "answer": { "type": "string" },
+                    "position": {
+                      "type": "object",
+                      "required": ["x", "y"],
+                      "description": "Percentage-based coordinates (0-100) from the top-left of the image.",
+                      "properties": {
+                        "x": { "type": "number", "minimum": 0, "maximum": 100 },
+                        "y": { "type": "number", "minimum": 0, "maximum": 100 }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

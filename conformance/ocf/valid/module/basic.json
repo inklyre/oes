@@ -1,0 +1,8 @@
+{
+  "ocf_version": "0.3.0",
+  "id": "getting-started",
+  "title": "Getting Started",
+  "lessons": [
+    { "id": "setup", "path": "lessons/setup" }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "binary-search-complexity-secure",
+  "type": "fill_blank",
+  "title": "Binary search complexity (graded)",
+  "statement": "A binary search on a sorted array of `n` elements runs in {{b1}} time.",
+  "answer_key": { "file": "answer-key.json" },
+  "type_config": {
+    "blanks": [
+      { "id": "b1", "answer": "O(log n)", "type": "text", "case_sensitive": false }
+    ]
+  }
+}

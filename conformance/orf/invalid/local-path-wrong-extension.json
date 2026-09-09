@@ -1,0 +1,8 @@
+{
+  "orf_version": "0.1.0",
+  "id": "lecture-slides",
+  "title": "Lecture 3 Slides",
+  "document_url": "https://raw.githubusercontent.com/x/y/main/lecture-3.pdf",
+  "downloadable": true,
+  "local_path": "lecture-3.pptx"
+}

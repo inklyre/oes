@@ -1,0 +1,22 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "complexity-match-secure",
+  "type": "match",
+  "title": "Match algorithm to complexity (graded)",
+  "statement": "Match each algorithm to its typical time complexity.",
+  "answer_key": { "file": "answer-key.json" },
+  "type_config": {
+    "left": [
+      { "id": "l1", "content": "O(1)" },
+      { "id": "l2", "content": "O(log n)" }
+    ],
+    "right": [
+      { "id": "r1", "content": "Hash table lookup" },
+      { "id": "r2", "content": "Binary search" }
+    ],
+    "pairs": [
+      { "left_id": "l1", "right_id": "r1" },
+      { "left_id": "l2", "right_id": "r2" }
+    ]
+  }
+}

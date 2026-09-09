@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oes.dev/schemas/oqf/v0.1.0/stimulus.schema.json",
+  "title": "OQF Stimulus",
+  "description": "Schema for stimulus.json — a shared prompt (reading passage, diagram, code snippet, dataset, etc.) referenced by one or more question.json files via their `stimulus` field, so it's authored once and never duplicated across the questions that share it.",
+  "type": "object",
+  "required": ["oqf_version", "id"],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional. Points an editor (e.g. VS Code) at this document's JSON Schema for inline validation/autocomplete. A JSON-tooling convention, not part of the OES content model — an OES parser ignores it like any other unrecognized field."
+    },
+    "oqf_version": {
+      "type": "string",
+      "pattern": "^0\\.1\\.\\d+$",
+      "description": "Any 0.1.x patch release of OQF — see the Versioning & Conformance policy for what's allowed to change in a patch."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Kebab-case. Must match this stimulus's folder name when co-located (referenced via a `path`)."
+    },
+    "title": {
+      "type": "string",
+      "description": "Optional — many stimuli (a bare passage or diagram) don't need one; a consumer falls back to something generic like \"Reading Passage\" when absent."
+    },
+    "authors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "GitHub usernames. A stimulus can be hosted and reused independently of any question, so it needs its own attribution."
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier, e.g. \"CC-BY-4.0\"."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "source": { "$ref": "#/definitions/source" }
+  },
+  "patternProperties": {
+    "^x_[a-z0-9_]+$": {}
+  },
+  "definitions": {
+    "source": {
+      "description": "Where this stimulus was originally sourced or adapted from, if it wasn't authored directly for OES — e.g. a reading passage produced by an importer against another platform's content. Entirely optional; omit for content authored directly. Distinct from this document's own top-level `license`, which describes this OES document's license, not what it was adapted from — the original may be more restrictive (or simply different) and belongs in `source.license` instead.",
+      "type": "object",
+      "required": ["url"],
+      "additionalProperties": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The original content's own URL."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Free-text label for the originating platform or site, e.g. \"Khan Academy\", \"MIT OpenCourseWare\". Deliberately not an enum — OES doesn't hard-code or endorse any specific platform; any importer fills in whatever's accurate."
+        },
+        "license": {
+          "type": "string",
+          "description": "The ORIGINAL content's license or terms of use at the source. Free text, not constrained to SPDX like this document's own `license` field — many platforms' terms of use aren't expressible as a single SPDX identifier."
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date",
+          "description": "When this content was fetched/adapted from the source — provenance, and a signal for how stale this copy might be."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-text context an importer or author wants to record — adaptation details, attribution requirements, anything not covered by the fields above."
+        }
+      }
+    }
+  }
+}

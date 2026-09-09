@@ -1,0 +1,14 @@
+{
+  "ovf_version": "0.1.0",
+  "id": "install-python",
+  "title": "Installing Python",
+  "video_url": "https://example.com/videos/python-setup",
+  "related": [
+    {
+      "type": "video",
+      "title": "Ambiguous — two addresses at once",
+      "url": "https://www.youtube.com/watch?v=abc123",
+      "video_lesson_url": "https://raw.githubusercontent.com/x/y/main/other/video.json"
+    }
+  ]
+}

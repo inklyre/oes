@@ -1,0 +1,16 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "bad-starter-code",
+  "type": "code",
+  "title": "Bad Starter Code",
+  "type_config": {
+    "languages": ["python"],
+    "starter_code": {
+      "python": { "prefix": "class Solution:\n" }
+    },
+    "test_cases": [
+      { "id": "tc1", "input": 1, "expected": 1, "is_hidden": false }
+    ]
+  },
+  "statement": "Do the thing."
+}

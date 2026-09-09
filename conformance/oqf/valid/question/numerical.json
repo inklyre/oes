@@ -1,0 +1,15 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "avg-lookup-time",
+  "type": "numerical",
+  "title": "Average lookup time in a well-sized hash table",
+  "difficulty": "easy",
+  "type_config": {
+    "answer": 42.5,
+    "tolerance": 0.1,
+    "unit": "ms"
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

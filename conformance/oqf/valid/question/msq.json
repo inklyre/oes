@@ -1,0 +1,35 @@
+{
+  "oqf_version": "0.1.1",
+  "id": "sorting-stable",
+  "type": "msq",
+  "title": "Which sorting algorithms are stable?",
+  "difficulty": "medium",
+  "type_config": {
+    "options": [
+      {
+        "id": "a",
+        "content": "Merge sort"
+      },
+      {
+        "id": "b",
+        "content": "Quick sort"
+      },
+      {
+        "id": "c",
+        "content": "Insertion sort"
+      },
+      {
+        "id": "d",
+        "content": "Heap sort"
+      }
+    ],
+    "answers": [
+      "a",
+      "c"
+    ],
+    "shuffle_options": true
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

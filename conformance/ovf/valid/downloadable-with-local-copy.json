@@ -1,0 +1,11 @@
+{
+  "ovf_version": "0.1.0",
+  "id": "intro-recap",
+  "title": "Course Recap",
+  "authors": ["ankit-ksh"],
+  "license": "CC-BY-4.0",
+  "video_url": "https://cdn.example.com/videos/intro-recap.mp4",
+  "duration_mins": 1.5,
+  "downloadable": true,
+  "local_path": "video.mp4"
+}

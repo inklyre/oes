@@ -1,0 +1,19 @@
+{
+  "ocf_version": "0.3.0",
+  "id": "intro-to-python",
+  "title": "Introduction to Python",
+  "authors": ["ankit-ksh"],
+  "license": "CC-BY-4.0",
+  "level": "beginner",
+  "estimated_mins": 360,
+  "modules": [
+    { "id": "getting-started", "path": "modules/getting-started" }
+  ],
+  "prerequisites": [
+    {
+      "id": "cs-fundamentals",
+      "course_url": "https://raw.githubusercontent.com/x/y/main/course.json",
+      "content_hash": "sha256-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

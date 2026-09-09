@@ -1,0 +1,21 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "two-sum-locked",
+  "type": "code",
+  "title": "Two Sum (locked boilerplate)",
+  "difficulty": "easy",
+  "type_config": {
+    "languages": ["python"],
+    "starter_code": {
+      "python": {
+        "prefix": "class Solution:\n",
+        "template": "    def two_sum(self, nums, target):\n        pass\n",
+        "suffix": "\nif __name__ == \"__main__\":\n    print(Solution().two_sum([2, 7, 11, 15], 9))\n"
+      }
+    },
+    "test_cases": [
+      { "id": "tc1", "input": { "nums": [2, 7, 11, 15], "target": 9 }, "expected": [0, 1], "is_hidden": false }
+    ]
+  },
+  "statement": { "file": "statement.md" }
+}

@@ -1,0 +1,8 @@
+{
+  "oaf_version": "0.1.0",
+  "id": "bad-source",
+  "title": "Bad Source",
+  "source": {
+    "platform": "Example Platform"
+  }
+}

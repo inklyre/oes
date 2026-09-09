@@ -1,0 +1,24 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "passage1-q1",
+  "type": "mcq",
+  "title": "Main idea of the passage",
+  "stimulus": {
+    "path": "../../stimuli/reading-passage-1",
+    "stimulus_url": "https://example.com/reading-passage-1/stimulus.json"
+  },
+  "type_config": {
+    "options": [
+      {
+        "id": "a",
+        "content": "A"
+      },
+      {
+        "id": "b",
+        "content": "B"
+      }
+    ],
+    "answer": "a"
+  },
+  "statement": "Placeholder statement text."
+}

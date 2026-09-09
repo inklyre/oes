@@ -1,0 +1,25 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "passage1-q1",
+  "type": "mcq",
+  "title": "Main idea of the passage",
+  "stimulus": {
+    "path": "../../stimuli/reading-passage-1"
+  },
+  "type_config": {
+    "options": [
+      {
+        "id": "a",
+        "content": "Shared resources tend to be overused without coordination."
+      },
+      {
+        "id": "b",
+        "content": "Private ownership always leads to overuse."
+      }
+    ],
+    "answer": "a"
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

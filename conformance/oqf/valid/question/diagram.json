@@ -1,0 +1,31 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "bst-parts",
+  "type": "diagram",
+  "title": "Label the parts of this binary search tree",
+  "difficulty": "easy",
+  "type_config": {
+    "image": "assets/bst-diagram.png",
+    "labels": [
+      {
+        "id": "l1",
+        "answer": "root",
+        "position": {
+          "x": 50,
+          "y": 10
+        }
+      },
+      {
+        "id": "l2",
+        "answer": "left subtree",
+        "position": {
+          "x": 25,
+          "y": 45
+        }
+      }
+    ]
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

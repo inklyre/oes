@@ -1,0 +1,16 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "cap-theorem-essay",
+  "type": "essay",
+  "title": "Discuss the CAP theorem's implications for distributed database design",
+  "difficulty": "hard",
+  "type_config": {
+    "min_words": 200,
+    "max_words": 1000,
+    "grading": "manual",
+    "rubric": "Defines C/A/P correctly, explains the tradeoff, gives a real example."
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

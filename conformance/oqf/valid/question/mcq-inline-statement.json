@@ -1,0 +1,17 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "two-sum-inline",
+  "type": "mcq",
+  "title": "Two Sum — time complexity",
+  "difficulty": "easy",
+  "statement": "Given an array of integers `nums` and an integer `target`, return the indices of the two numbers that add up to `target`.",
+  "type_config": {
+    "options": [
+      { "id": "a", "content": "O(n^2)" },
+      { "id": "b", "content": "O(n log n)" },
+      { "id": "c", "content": "O(n)" },
+      { "id": "d", "content": "O(1)" }
+    ],
+    "answer": "c"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "opf_version": "0.2.0",
+  "id": "imported-set",
+  "title": "Imported Practice Set",
+  "source": {
+    "url": "https://example.edu/exercises/unit-1",
+    "platform": "Example Practice Platform",
+    "retrieved_at": "2026-09-06"
+  },
+  "questions": [{ "id": "q1", "path": "questions/q1" }]
+}

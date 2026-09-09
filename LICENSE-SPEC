@@ -1,0 +1,31 @@
+Creative Commons Attribution 4.0 International
+
+CC BY 4.0
+
+This work — the OES (Open Education Standards) specifications, schemas,
+and consolidated spec downloads (everything under `schemas/`, `downloads/`,
+and the spec content in `site/`) — is licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0).
+
+You are free to share (copy and redistribute in any medium or format) and
+adapt (remix, transform, and build upon) this work for any purpose, even
+commercially, as long as you give appropriate credit, provide a link to
+this license, and indicate if changes were made. You may do so in any
+reasonable manner, but not in any way that suggests Inklyre endorses you
+or your use.
+
+No additional restrictions — you may not apply legal terms or
+technological measures that legally restrict others from doing anything
+this license permits.
+
+The full legal text of CC BY 4.0 is available at:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Why attribution, not public domain (CC0): the same reasoning WHATWG gave
+when moving the HTML Living Standard from CC0 to CC BY in 2017 — an
+attribution requirement makes a derivative/forked copy of this
+specification traceable back to its origin, which a public-domain
+dedication does not, at a cost WHATWG itself judged "modest."
+
+The code in this repository (`scripts/`, and any tooling source) is
+licensed separately under Apache 2.0 — see `LICENSE`.

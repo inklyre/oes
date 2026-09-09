@@ -1,0 +1,25 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "binary-search-complexity",
+  "type": "fill_blank",
+  "title": "Binary search complexity",
+  "difficulty": "easy",
+  "type_config": {
+    "blanks": [
+      {
+        "id": "b1",
+        "answer": "O(log n)",
+        "type": "text",
+        "case_sensitive": false
+      },
+      {
+        "id": "b2",
+        "answer": "ceil(log2(n))",
+        "type": "expression"
+      }
+    ]
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}

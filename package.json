@@ -1,0 +1,20 @@
+{
+  "name": "oes",
+  "version": "0.1.0",
+  "description": "Open Education Standards — open specifications for education technology. Reference tooling built on this spec lives in github.com/inklyre/oes-tooling.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev site",
+    "docs:build": "vitepress build site",
+    "docs:preview": "vitepress preview site",
+    "conformance": "node scripts/validate-conformance.mjs",
+    "check-shared-definitions": "node scripts/check-shared-definitions.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "vitepress": "^1.6.4"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}

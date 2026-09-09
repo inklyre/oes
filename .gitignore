@@ -1,0 +1,9 @@
+node_modules/
+site/.vitepress/dist/
+site/.vitepress/cache/
+.DS_Store
+*.log
+dist/
+
+# Personal/internal reference notes — not meant for the public repo.
+planning/

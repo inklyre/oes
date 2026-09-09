@@ -1,0 +1,37 @@
+{
+  "oqf_version": "0.1.0",
+  "id": "big-o-lookup",
+  "type": "mcq",
+  "title": "Hash table average lookup time",
+  "difficulty": "easy",
+  "authors": [
+    "ankit-ksh"
+  ],
+  "license": "CC-BY-4.0",
+  "max_attempts": 3,
+  "type_config": {
+    "options": [
+      {
+        "id": "a",
+        "content": "O(1)"
+      },
+      {
+        "id": "b",
+        "content": "O(log n)"
+      },
+      {
+        "id": "c",
+        "content": "O(n)"
+      },
+      {
+        "id": "d",
+        "content": "O(n log n)"
+      }
+    ],
+    "answer": "a",
+    "shuffle_options": true
+  },
+  "statement": {
+    "file": "statement.md"
+  }
+}
