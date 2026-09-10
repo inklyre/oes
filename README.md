@@ -10,25 +10,25 @@ versioned like code), database-free (no backend required to author or host
 content), and auth-agnostic (hosting and access control are left to the
 platform, not the format).
 
-Browse the full docs site: **https://inklyre.github.io/oes/**
+Browse the full docs site: **https://oes.inklyre.org/**
 
 ## Current specs
 
 | Spec | Description | Version | Status | Docs |
 |---|---|---|---|---|
-| **OCF** — Open Course Format | Courses of modules and lessons, each an ordered sequence of items linking OAF articles, OVF video lessons, OPF practice sets, and ORF reference documents | 0.3.0 | Draft | [Read the spec](https://inklyre.github.io/oes/specs/ocf/) |
-| **OPF** — Open Practice Format | Practice sets: ordered collections of OQF questions plus set-level metadata | 0.2.0 | Draft | [Read the spec](https://inklyre.github.io/oes/specs/opf/) |
-| **OQF** — Open Question Format | A single question: 11 types, static files, reusable across sets | 0.1.0 | Draft | [Read the spec](https://inklyre.github.io/oes/specs/oqf/) |
-| **OAF** — Open Article Format | A single written article — real authored content, not a link | 0.1.0 | Draft | [Read the spec](https://inklyre.github.io/oes/specs/oaf/) |
-| **OVF** — Open Video Format | A single video lesson: metadata, transcript, and chapters around an externally-hosted video | 0.1.0 | Draft | [Read the spec](https://inklyre.github.io/oes/specs/ovf/) |
-| **ORF** — Open Resource Format | A single reference document (PDF, ebook, paper): metadata, page count, and a table of contents around an externally-hosted file | 0.1.0 | Draft | [Read the spec](https://inklyre.github.io/oes/specs/orf/) |
+| **OCF** — Open Course Format | Courses of modules and lessons, each an ordered sequence of items linking OAF articles, OVF video lessons, OPF practice sets, and ORF reference documents | 0.3.0 | Draft | [Read the spec](https://oes.inklyre.org/specs/ocf/) |
+| **OPF** — Open Practice Format | Practice sets: ordered collections of OQF questions plus set-level metadata | 0.2.0 | Draft | [Read the spec](https://oes.inklyre.org/specs/opf/) |
+| **OQF** — Open Question Format | A single question: 11 types, static files, reusable across sets | 0.1.0 | Draft | [Read the spec](https://oes.inklyre.org/specs/oqf/) |
+| **OAF** — Open Article Format | A single written article — real authored content, not a link | 0.1.0 | Draft | [Read the spec](https://oes.inklyre.org/specs/oaf/) |
+| **OVF** — Open Video Format | A single video lesson: metadata, transcript, and chapters around an externally-hosted video | 0.1.0 | Draft | [Read the spec](https://oes.inklyre.org/specs/ovf/) |
+| **ORF** — Open Resource Format | A single reference document (PDF, ebook, paper): metadata, page count, and a table of contents around an externally-hosted file | 0.1.0 | Draft | [Read the spec](https://oes.inklyre.org/specs/orf/) |
 
 Each spec also has a JSON Schema (in [`schemas/`](./schemas)) and a single
 downloadable Markdown file with the complete spec (in
 [`downloads/`](./downloads)) for offline reference. Versioning policy,
 conformance language (MUST/SHOULD/MAY), the cross-spec content-integrity
 mechanism, and security considerations are documented once, shared across
-every spec, at [**Versioning & Conformance**](https://inklyre.github.io/oes/conformance).
+every spec, at [**Versioning & Conformance**](https://oes.inklyre.org/conformance).
 
 ## Repository structure
 

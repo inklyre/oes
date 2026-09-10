@@ -3,12 +3,12 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: 'OES',
   description: 'Open Education Standards — open specifications for education technology',
-  base: '/oes/',
+  base: '/',
   lastUpdated: true,
   cleanUrls: true,
 
   head: [
-    ['link', { rel: 'icon', href: '/oes/logo.svg', type: 'image/svg+xml' }],
+    ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
   ],
 
   themeConfig: {

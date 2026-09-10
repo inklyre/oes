@@ -2,7 +2,7 @@
 
 Machine-readable JSON Schema (draft-07):
 
-- `set.json` → [`schemas/opf/v0.2.0/set.schema.json`](/oes/schemas/opf/v0.2.0/set.schema.json)
+- `set.json` → [`schemas/opf/v0.2.0/set.schema.json`](/schemas/opf/v0.2.0/set.schema.json)
 
 A set's questions are validated separately, against
 [OQF's `question.schema.json`](/specs/oqf/schema-reference) — `set.json`

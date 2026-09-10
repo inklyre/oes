@@ -19,7 +19,7 @@ file itself even outside this repo's workspace.
 
 ```json
 {
-  "$schema": "https://inklyre.github.io/oes/schemas/ocf/v0.3.0/course.schema.json",
+  "$schema": "https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json",
   "ocf_version": "0.3.0",
   "id": "intro-to-python",
   "title": "Introduction to Python",
@@ -42,13 +42,13 @@ URL for every OES document type, current as of the versions in this repo:
 
 | Document | `$schema` URL |
 |---|---|
-| `course.json` / `module.json` / `lesson.json` | `https://inklyre.github.io/oes/schemas/ocf/v0.3.0/course.schema.json` |
-| `set.json` | `https://inklyre.github.io/oes/schemas/opf/v0.2.0/set.schema.json` |
-| `question.json` | `https://inklyre.github.io/oes/schemas/oqf/v0.1.0/question.schema.json` |
-| `stimulus.json` | `https://inklyre.github.io/oes/schemas/oqf/v0.1.0/stimulus.schema.json` |
-| `article.json` | `https://inklyre.github.io/oes/schemas/oaf/v0.1.0/article.schema.json` |
-| `video.json` | `https://inklyre.github.io/oes/schemas/ovf/v0.1.0/video.schema.json` |
-| `resource.json` | `https://inklyre.github.io/oes/schemas/orf/v0.1.0/resource.schema.json` |
+| `course.json` / `module.json` / `lesson.json` | `https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json` |
+| `set.json` | `https://oes.inklyre.org/schemas/opf/v0.2.0/set.schema.json` |
+| `question.json` | `https://oes.inklyre.org/schemas/oqf/v0.1.0/question.schema.json` |
+| `stimulus.json` | `https://oes.inklyre.org/schemas/oqf/v0.1.0/stimulus.schema.json` |
+| `article.json` | `https://oes.inklyre.org/schemas/oaf/v0.1.0/article.schema.json` |
+| `video.json` | `https://oes.inklyre.org/schemas/ovf/v0.1.0/video.schema.json` |
+| `resource.json` | `https://oes.inklyre.org/schemas/orf/v0.1.0/resource.schema.json` |
 
 ## Option 2: a workspace `.vscode/settings.json`
 
@@ -61,31 +61,31 @@ instead:
   "json.schemas": [
     {
       "fileMatch": ["course.json", "module.json", "lesson.json"],
-      "url": "https://inklyre.github.io/oes/schemas/ocf/v0.3.0/course.schema.json"
+      "url": "https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json"
     },
     {
       "fileMatch": ["set.json"],
-      "url": "https://inklyre.github.io/oes/schemas/opf/v0.2.0/set.schema.json"
+      "url": "https://oes.inklyre.org/schemas/opf/v0.2.0/set.schema.json"
     },
     {
       "fileMatch": ["question.json"],
-      "url": "https://inklyre.github.io/oes/schemas/oqf/v0.1.0/question.schema.json"
+      "url": "https://oes.inklyre.org/schemas/oqf/v0.1.0/question.schema.json"
     },
     {
       "fileMatch": ["stimulus.json"],
-      "url": "https://inklyre.github.io/oes/schemas/oqf/v0.1.0/stimulus.schema.json"
+      "url": "https://oes.inklyre.org/schemas/oqf/v0.1.0/stimulus.schema.json"
     },
     {
       "fileMatch": ["article.json"],
-      "url": "https://inklyre.github.io/oes/schemas/oaf/v0.1.0/article.schema.json"
+      "url": "https://oes.inklyre.org/schemas/oaf/v0.1.0/article.schema.json"
     },
     {
       "fileMatch": ["video.json"],
-      "url": "https://inklyre.github.io/oes/schemas/ovf/v0.1.0/video.schema.json"
+      "url": "https://oes.inklyre.org/schemas/ovf/v0.1.0/video.schema.json"
     },
     {
       "fileMatch": ["resource.json"],
-      "url": "https://inklyre.github.io/oes/schemas/orf/v0.1.0/resource.schema.json"
+      "url": "https://oes.inklyre.org/schemas/orf/v0.1.0/resource.schema.json"
     }
   ]
 }
@@ -116,7 +116,7 @@ The URLs above track the current schema version for each spec. If you
 need to pin to a specific past minor version instead (e.g. while
 migrating), point at that version's path directly — every version this
 repo has ever shipped stays live under `schemas/{spec}/v{version}/`, e.g.
-[`schemas/ocf/v0.2.0/course.schema.json`](/oes/schemas/ocf/v0.2.0/course.schema.json).
+[`schemas/ocf/v0.2.0/course.schema.json`](/schemas/ocf/v0.2.0/course.schema.json).
 
 ## See also
 

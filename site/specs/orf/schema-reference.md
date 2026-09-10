@@ -2,7 +2,7 @@
 
 Machine-readable JSON Schema (draft-07):
 
-- `resource.json` → [`schemas/orf/v0.1.0/resource.schema.json`](/oes/schemas/orf/v0.1.0/resource.schema.json)
+- `resource.json` → [`schemas/orf/v0.1.0/resource.schema.json`](/schemas/orf/v0.1.0/resource.schema.json)
 
 ## `resource.json`
 

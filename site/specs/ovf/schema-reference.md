@@ -2,7 +2,7 @@
 
 Machine-readable JSON Schema (draft-07):
 
-- `video.json` → [`schemas/ovf/v0.1.0/video.schema.json`](/oes/schemas/ovf/v0.1.0/video.schema.json)
+- `video.json` → [`schemas/ovf/v0.1.0/video.schema.json`](/schemas/ovf/v0.1.0/video.schema.json)
 
 ## `video.json`
 

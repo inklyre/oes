@@ -2,7 +2,7 @@
 
 This page applies to every OES spec — [OCF](/specs/ocf/), [OPF](/specs/opf/),
 [OQF](/specs/oqf/), [OAF](/specs/oaf/), and [OVF](/specs/ovf/) — the same
-way the <a href="/oes/extensions/registry.md">extension mechanism</a> and the local/
+way the <a href="/extensions/registry.md">extension mechanism</a> and the local/
 external reference convention are shared across all five rather than
 redefined per spec.
 

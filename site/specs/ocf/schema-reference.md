@@ -4,7 +4,7 @@ Machine-readable JSON Schema (draft-07) is published as a single file
 covering all three OCF document types, using `definitions` and a top-level
 `oneOf`:
 
-- [`schemas/ocf/v0.3.0/course.schema.json`](/oes/schemas/ocf/v0.3.0/course.schema.json)
+- [`schemas/ocf/v0.3.0/course.schema.json`](/schemas/ocf/v0.3.0/course.schema.json)
 
 Validate a specific file type by pointing your validator at the matching
 `#/definitions/...` fragment: `#/definitions/course`,

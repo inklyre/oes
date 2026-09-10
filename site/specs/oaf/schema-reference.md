@@ -2,7 +2,7 @@
 
 Machine-readable JSON Schema (draft-07):
 
-- `article.json` → [`schemas/oaf/v0.1.0/article.schema.json`](/oes/schemas/oaf/v0.1.0/article.schema.json)
+- `article.json` → [`schemas/oaf/v0.1.0/article.schema.json`](/schemas/oaf/v0.1.0/article.schema.json)
 
 ## `article.json`
 

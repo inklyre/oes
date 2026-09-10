@@ -51,7 +51,7 @@ never defined by the core OPF spec. This applies at any level of `set.json`
 ## Registering an extension
 
 Namespaces intended for reuse beyond a single private platform should be
-listed in the shared <a href="/oes/extensions/registry.md">extension registry</a>
+listed in the shared <a href="/extensions/registry.md">extension registry</a>
 — one registry, shared across OPF, OQF, OCF, OAF, and OVF — so authors can
 discover and interoperate with them instead of reinventing the same field
 under a different name.

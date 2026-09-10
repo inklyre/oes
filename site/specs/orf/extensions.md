@@ -30,6 +30,6 @@ never defined by the core ORF spec. This applies at any level of
 ## Registering an extension
 
 Namespaces intended for reuse are listed in the shared
-<a href="/oes/extensions/registry.md">extension registry</a> — one registry
+<a href="/extensions/registry.md">extension registry</a> — one registry
 shared across OCF, OPF, OQF, OAF, OVF, and ORF. Open a pull request against
 `extensions/registry.md` to register one.

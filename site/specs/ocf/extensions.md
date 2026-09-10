@@ -39,7 +39,7 @@ Identical to OPF's:
 ## Registering an extension
 
 OCF, OPF, OQF, OAF, and OVF all share one
-<a href="/oes/extensions/registry.md">extension registry</a>. Register a
+<a href="/extensions/registry.md">extension registry</a>. Register a
 namespace there once and it applies across every OES spec — many extension
 concepts (e.g. spaced-repetition scheduling, cohort/enrollment metadata)
 are useful across course, practice, and content contexts alike.

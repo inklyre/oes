@@ -2,8 +2,8 @@
 
 Machine-readable JSON Schema (draft-07):
 
-- `question.json` → [`schemas/oqf/v0.1.0/question.schema.json`](/oes/schemas/oqf/v0.1.0/question.schema.json)
-- `stimulus.json` → [`schemas/oqf/v0.1.0/stimulus.schema.json`](/oes/schemas/oqf/v0.1.0/stimulus.schema.json)
+- `question.json` → [`schemas/oqf/v0.1.0/question.schema.json`](/schemas/oqf/v0.1.0/question.schema.json)
+- `stimulus.json` → [`schemas/oqf/v0.1.0/stimulus.schema.json`](/schemas/oqf/v0.1.0/stimulus.schema.json)
 
 ## `question.json`
 
