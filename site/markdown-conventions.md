@@ -10,6 +10,19 @@ spec rather than redefined per spec.
 
 [[toc]]
 
+## Base dialect
+
+OES prose is [CommonMark](https://commonmark.org/), plus GitHub Flavored
+Markdown's [tables](https://github.github.com/gfm/#tables-extension-),
+[strikethrough](https://github.github.com/gfm/#strikethrough-extension-),
+and [task lists](https://github.github.com/gfm/#task-list-items-extension-).
+Autolink literals are permitted but SHOULD NOT be relied on — write explicit
+links instead.
+
+Naming the dialect matters more than which one is chosen. Without it, two
+conforming consumers can render the same table as a table and as four lines
+of pipes, and an author has no way to know which they'll get.
+
 ## Figures
 
 There's no special OES mechanism for this — it's just standard Markdown
@@ -61,6 +74,27 @@ valid, renderable Markdown either way.
   to what could be mistaken for math (e.g. `$5` right before a digit),
   escape it as `\$` — the same approach GitHub's own math rendering
   documents.
+
+### Math is extracted before inline Markdown
+
+A consumer that renders math MUST identify `$...$`/`$$...$$` spans **before**
+applying inline Markdown syntax, and MUST pass their contents to the math
+renderer unchanged.
+
+This is not a stylistic preference — it decides whether common math renders
+correctly at all:
+
+| Source | Extracted first | Emphasis first |
+|---|---|---|
+| `$a_i$ and $a_{i+1}$` | two subscripts | `_i$ and $a_` becomes emphasis |
+| `$$\begin{bmatrix} a \\ b \end{bmatrix}$$` | `\\` is a row break | `\\` becomes one literal backslash, row break lost |
+
+Both failures are silent: the document still renders, just wrongly. An
+author therefore MUST NOT need to escape `_` or `\\` inside math, and a
+consumer MUST NOT require it. Implementations built on
+[remark-math](https://github.com/remarkjs/remark-math) or an equivalent
+tokenizer-level extension get this behaviour by construction; a pipeline
+that runs a regex over already-rendered HTML does not.
 
 ## See also
 
