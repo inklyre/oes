@@ -1,0 +1,10 @@
+{
+  "opk_version": "0.2.0",
+  "name": "acme/databases",
+  "version": "2.1.0",
+  "title": "Databases",
+  "entry": {
+    "type": "course",
+    "path": "course.json"
+  }
+}

@@ -35,6 +35,7 @@ export default defineConfig({
           { text: 'OAF — Open Article Format', link: '/specs/oaf/' },
           { text: 'OVF — Open Video Format', link: '/specs/ovf/' },
           { text: 'ORF — Open Resource Format', link: '/specs/orf/' },
+          { text: 'OPK — Open Package Format', link: '/specs/opk/' },
         ],
       },
     ],
@@ -123,6 +124,17 @@ export default defineConfig({
             { text: 'Authoring Guide', link: '/specs/orf/authoring' },
             { text: 'Extensions', link: '/specs/orf/extensions' },
             { text: 'Examples', link: '/specs/orf/examples' },
+          ],
+        },
+      ],
+      '/specs/opk/': [
+        {
+          text: 'OPK — Open Package Format',
+          items: [
+            { text: 'Overview', link: '/specs/opk/' },
+            { text: 'Package Structure', link: '/specs/opk/file-structure' },
+            { text: 'Schema Reference', link: '/specs/opk/schema-reference' },
+            { text: 'The Bundled Payload', link: '/specs/opk/bundled-payload' },
           ],
         },
       ],

@@ -1,10 +1,10 @@
 # Versioning & Conformance
 
 This page applies to every OES spec — [OCF](/specs/ocf/), [OPF](/specs/opf/),
-[OQF](/specs/oqf/), [OAF](/specs/oaf/), [OVF](/specs/ovf/), and
-[ORF](/specs/orf/) — the same
+[OQF](/specs/oqf/), [OAF](/specs/oaf/), [OVF](/specs/ovf/),
+[ORF](/specs/orf/), and [OPK](/specs/opk/) — the same
 way the <a href="/extensions/registry.md">extension mechanism</a> and the local/
-external reference convention are shared across all six rather than
+external reference convention are shared across all seven rather than
 redefined per spec.
 
 [[toc]]
@@ -29,8 +29,10 @@ sentence to be rewritten.
 
 ## Scope: content, not runtime state
 
-All six OES specs describe **content** — static documents, authored once,
-versioned with git, identical for every learner who reads them. That's a
+The six **content** specs — OCF, OPF, OQF, OAF, OVF, ORF — describe
+static documents, authored once, versioned with git, and identical for
+every learner who reads them. ([OPK](/specs/opk/) is the seventh spec and
+describes distribution rather than content.) That's a
 deliberate, load-bearing choice, not an oversight, and it draws a firm
 line around what OES will and won't take on.
 
@@ -42,7 +44,7 @@ spec, and it never will be. This data is fundamentally
 different from content on every axis that matters here: it's per-learner
 rather than shared, generated continuously at runtime rather than
 authored once, and needs to be queried/updated live rather than fetched
-and cached. Folding it into these six specs would mean giving up the
+and cached. Folding it into those six specs would mean giving up the
 "static files in git" model that makes them portable and swappable
 between hosting providers in the first place.
 
@@ -71,8 +73,8 @@ scoring policy can use; it never dictates the policy itself.
 ## Versioning policy
 
 Every OES spec is independently versioned (`ocf_version`, `opf_version`,
-`oqf_version`, `oaf_version`, `ovf_version`, `orf_version`), and every one
-of them is currently **`0.x`, Draft status** — pre-1.0. That status has a
+`oqf_version`, `oaf_version`, `ovf_version`, `orf_version`, `opk_version`),
+and every one of them is currently **`0.x`, Draft status** — pre-1.0. That status has a
 direct, practical consequence for how strictly a document's version field
 should be checked.
 
@@ -109,30 +111,31 @@ changelog will state when it reaches 1.0.
 
 Each spec keeps its own version field — `oqf_version` only changes when
 OQF's own shape changes, and a document never needs re-stamping just
-because a sibling spec moved. But the six specs are not independent in
+because a sibling spec moved. But the specs are not independent in
 practice: OCF lessons reference OAF/OVF/OPF/ORF documents, OPF sets
-reference OQF questions, and a tool consuming "OES" is really consuming
-all six together. Tracking six version numbers separately, with no single
+reference OQF questions, an OPK package wraps any of them, and a tool
+consuming "OES" is really consuming them together. Tracking seven version
+numbers separately, with no single
 statement of which combinations are actually tested and meant to work
 together, makes it hard for a tool author to be sure what they're
 building against.
 
 **OES itself carries one version number**, independent of and layered on
-top of the six per-spec ones — tracked as this repository's own
+top of the per-spec ones — tracked as this repository's own
 `package.json` version and tagged in git on every release. It names a
 specific, tested combination of sub-spec versions, published as a
 compatibility table on this page:
 
-| OES version | OCF | OPF | OQF | OAF | OVF | ORF |
-|---|---|---|---|---|---|---|
-| `0.2.0` (current, pre-release) | `0.3.x` | `0.3.x` | `0.2.x` | `0.2.x` | `0.1.x` | `0.1.x` |
-| `0.1.0` | `0.3.x` | `0.2.x` | `0.1.x` | `0.1.x` | `0.1.x` | `0.1.x` |
+| OES version | OCF | OPF | OQF | OAF | OVF | ORF | OPK |
+|---|---|---|---|---|---|---|---|
+| `0.2.0` (current, pre-release) | `0.3.x` | `0.3.x` | `0.2.x` | `0.2.x` | `0.1.x` | `0.1.x` | `0.1.x` |
+| `0.1.0` | `0.3.x` | `0.2.x` | `0.1.x` | `0.1.x` | `0.1.x` | `0.1.x` | — |
 
 The OES version bumps whenever **any** sub-spec changes, even if the
-other five are byte-identical to the previous release — that bump is what
+others are byte-identical to the previous release — that bump is what
 makes "OES v0.1.0" a precise, checkable claim rather than a vague label.
 A tool that wants certainty pins to an OES version and reads this table,
-rather than tracking six independent compatibility ranges itself. This
+rather than tracking seven independent compatibility ranges itself. This
 is why an *unrelated* spec's patch doesn't force any existing course/set/
 question/article/video file to change: the OES version is a release name
 for a tested bundle, not a field embedded in content — so a `course.json`
@@ -141,7 +144,7 @@ OCF's own shape didn't move, with nothing to edit.
 
 ## Conformance profiles
 
-With six specs, "supports OES" says almost nothing. A learner-facing app
+With six content specs, "supports OES" says almost nothing. A learner-facing app
 that renders courses and articles but has no question engine is a
 perfectly reasonable OES consumer; so is a question bank that never
 renders a course. Profiles let a consumer state what it implements and an
@@ -160,6 +163,12 @@ mandatory base plus named capabilities a consumer declares alongside it.
 
 A consumer states its profile as Core plus the capabilities it has, e.g.
 "OES 0.2.0 Core +Practice" or "OES 0.2.0 Core +Media +Practice +Graded".
+
+[OPK](/specs/opk/) sits outside this table on purpose. Profiles describe
+what a consumer can *render*; OPK describes how content is *distributed*.
+An app that imports packages and one that reads files from a directory
+can have identical rendering capability, so packaging support is declared
+separately rather than folded into a profile.
 
 ### Question types within +Practice
 

@@ -23,6 +23,7 @@ const SPECS = {
   oaf: { schema: CURRENT_SCHEMAS.oaf },
   ovf: { schema: CURRENT_SCHEMAS.ovf },
   orf: { schema: CURRENT_SCHEMAS.orf },
+  opk: { schema: CURRENT_SCHEMAS.opk },
   // OCF is one schema file covering three document types via #/definitions/{name}.
   // Fixtures live one level deeper, in valid|invalid/{course,module,lesson}/*.json —
   // that subfolder name is the definition to validate against.

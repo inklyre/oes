@@ -1,0 +1,36 @@
+{
+  "opk_version": "0.1.0",
+  "name": "acme/databases",
+  "version": "2.1.0",
+  "title": "Databases",
+  "entry": {
+    "type": "course",
+    "path": "course.json"
+  },
+  "license": "CC-BY-4.0",
+  "language": "en",
+  "oes_version": "0.2.0",
+  "authors": [
+    "ankit-ksh"
+  ],
+  "tags": [
+    "databases"
+  ],
+  "requires": {
+    "profiles": [
+      "Core",
+      "+Practice"
+    ]
+  },
+  "dependencies": {
+    "acme/sql-basics": "^1.2.0"
+  },
+  "digest": "sha256-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "files": [
+    {
+      "path": "course.json",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "bytes": 512
+    }
+  ]
+}

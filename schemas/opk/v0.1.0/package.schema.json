@@ -1,0 +1,200 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oes.inklyre.org/schemas/opk/v0.1.0/package.schema.json",
+  "title": "OPK Package",
+  "description": "Schema for package.json, the manifest of a shareable unit of OES content in the Open Package Format (OPK), version 0.1.0.",
+  "type": "object",
+  "required": [
+    "opk_version",
+    "name",
+    "version",
+    "title",
+    "entry"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional. Points an editor (e.g. VS Code) at this document's JSON Schema for inline validation/autocomplete. A JSON-tooling convention, not part of the OES content model — an OES parser ignores it like any other unrecognized field."
+    },
+    "opk_version": {
+      "type": "string",
+      "pattern": "^0\\.1\\.\\d+$",
+      "description": "Any 0.1.x patch release of OPK — see the Versioning & Conformance policy for what's allowed to change in a patch."
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*/[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "{namespace}/{package}, both kebab-case. The namespace is what a registry grants ownership of; OPK takes no position on how."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?(\\+[0-9A-Za-z.-]+)?$",
+      "description": "SemVer for the package's content, independent of every spec version inside it. Major when an existing reference into this content would now mean something different."
+    },
+    "title": {
+      "type": "string",
+      "description": "Human-readable name, for a listing."
+    },
+    "description": {
+      "type": "string",
+      "description": "One or two sentences, for a listing."
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "GitHub usernames."
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX identifier. Strongly recommended on anything published — content with no stated license is content nobody can safely reuse."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "language": {
+      "type": "string",
+      "description": "BCP 47 tag for the content's primary language."
+    },
+    "oes_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "The OES release this package was authored against. Lets a consumer check compatibility once rather than inspecting every document's own version field."
+    },
+    "entry": {
+      "type": "object",
+      "required": [
+        "type",
+        "path"
+      ],
+      "additionalProperties": true,
+      "description": "The document a consumer opens first. Named explicitly so no consumer has to guess or probe for it.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "course",
+            "set",
+            "article",
+            "video",
+            "resource"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "Path relative to the package root, e.g. \"course.json\"."
+        }
+      }
+    },
+    "requires": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "What a consumer must implement to render this package.",
+      "properties": {
+        "profiles": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "Core",
+              "+Media",
+              "+Practice",
+              "+Graded",
+              "+code",
+              "+submission"
+            ]
+          },
+          "description": "Conformance profiles — see the Conformance profiles section. A consumer that doesn't implement them SHOULD refuse the package rather than render it partially."
+        }
+      }
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "Other packages this one needs, as {name: semver range}. A release range, not a location — OPK takes no position on where packages live. Distinct from a course's `prerequisites`, which are pedagogical.",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*/[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256-[A-Fa-f0-9]{64}$",
+      "description": "SHA-256 over a canonical listing of every file path and its own SHA-256, sorted by path — independent of archive format, file ordering, and timestamps. Covers every file including prose and images, which per-document content_hash does not. Absent while authoring; a registry SHOULD require it on publish."
+    },
+    "files": {
+      "type": "array",
+      "description": "The manifest. Absent while authoring; a registry SHOULD require it on publish, since it is what makes `digest` reproducible and lets a consumer verify a partial fetch.",
+      "items": {
+        "type": "object",
+        "required": [
+          "path",
+          "sha256",
+          "bytes"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Relative to the package root. MUST NOT escape it."
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[A-Fa-f0-9]{64}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "source": {
+      "$ref": "#/definitions/source"
+    }
+  },
+  "patternProperties": {
+    "^x_[a-z0-9_]+$": {}
+  },
+  "definitions": {
+    "source": {
+      "description": "Where this content was originally sourced or adapted from, if it wasn't authored directly for OES — e.g. produced by an importer against another platform's content. Entirely optional; omit for content authored directly. Distinct from this document's own top-level `license`, which describes this OES document's license, not what it was adapted from — the original may be more restrictive (or simply different) and belongs in `source.license` instead. Also distinct from `downloadable`/`local_path`: `source` records provenance, it never by itself grants redistribution rights to the underlying document file.",
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The original content's own URL."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Free-text label for the originating platform or site. Deliberately not an enum — OES doesn't hard-code or endorse any specific platform; any importer fills in whatever's accurate."
+        },
+        "license": {
+          "type": "string",
+          "description": "The ORIGINAL content's license or terms of use at the source. Free text, not constrained to SPDX like this document's own `license` field."
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date",
+          "description": "When this content was fetched/adapted from the source."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-text context an importer or author wants to record."
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://inklyre.github.io/oes/schemas/ocf/v0.3.0/course.schema.json",
+  "$schema": "https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json",
   "ocf_version": "0.3.0",
   "id": "intro-to-python",
   "title": "Introduction to Python",

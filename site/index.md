@@ -37,6 +37,7 @@ features:
 | [OAF — Open Article Format](/specs/oaf/) | A single written article — real authored content, not a link | 0.2.0 | Draft |
 | [OVF — Open Video Format](/specs/ovf/) | A single video lesson: metadata, transcript, and chapters around an externally-hosted video | 0.1.0 | Draft |
 | [ORF — Open Resource Format](/specs/orf/) | A single reference document (PDF, ebook, paper): metadata, page count, and a table of contents around an externally-hosted file | 0.1.0 | Draft |
+| [OPK — Open Package Format](/specs/opk/) | A shareable, versioned unit of OES content: a namespaced name, a digest, a manifest, and the bundled payload a registry serves | 0.1.0 | Draft |
 
 </div>
 
