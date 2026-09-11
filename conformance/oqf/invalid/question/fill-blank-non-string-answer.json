@@ -1,0 +1,19 @@
+{
+  "oqf_version": "0.2.0",
+  "id": "numeric-answer-member",
+  "type": "fill_blank",
+  "title": "Number in the answer list",
+  "statement": "A {{b1}}.",
+  "type_config": {
+    "blanks": [
+      {
+        "id": "b1",
+        "answer": [
+          "0.5",
+          0.5
+        ],
+        "type": "number"
+      }
+    ]
+  }
+}

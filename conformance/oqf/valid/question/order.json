@@ -1,17 +1,34 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "quicksort-steps",
   "type": "order",
   "title": "Order the steps of Quicksort",
   "difficulty": "medium",
   "type_config": {
     "items": [
-      { "id": "s1", "content": "Choose a pivot element" },
-      { "id": "s2", "content": "Partition the array around the pivot" },
-      { "id": "s3", "content": "Recursively sort the left partition" },
-      { "id": "s4", "content": "Recursively sort the right partition" }
+      {
+        "id": "s1",
+        "content": "Choose a pivot element"
+      },
+      {
+        "id": "s2",
+        "content": "Partition the array around the pivot"
+      },
+      {
+        "id": "s3",
+        "content": "Recursively sort the left partition"
+      },
+      {
+        "id": "s4",
+        "content": "Recursively sort the right partition"
+      }
     ],
-    "correct_order": ["s1", "s2", "s3", "s4"],
+    "correct_order": [
+      "s1",
+      "s2",
+      "s3",
+      "s4"
+    ],
     "shuffle": true
   },
   "statement": {

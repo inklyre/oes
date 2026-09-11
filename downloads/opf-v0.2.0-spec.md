@@ -1,8 +1,8 @@
 # OPF — Open Practice Format
 
-**Version 0.2.0 · Status: Draft · License: CC0 1.0**
+**Version 0.2.0 · Status: Draft · License: CC BY 4.0**
 
-Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
+Part of [OES — Open Education Standards](https://oes.inklyre.org/).
 
 ## Table of contents
 
@@ -23,7 +23,7 @@ Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
 OPF (Open Practice Format) is an open specification for a **practice
 set** — an ordered collection of questions plus set-level metadata, stored
 as static files. As of v0.2.0, OPF does not define what a question looks
-like — that's [OQF](https://inklyre.github.io/oes/specs/oqf/)'s job — it
+like — that's [OQF](https://oes.inklyre.org/specs/oqf/)'s job — it
 defines how questions are assembled, scored, and shipped together as one
 assessable unit.
 
@@ -169,9 +169,9 @@ dsa-fundamentals/
 }
 ```
 
-See the [full Examples page](https://inklyre.github.io/oes/specs/opf/examples)
+See the [full Examples page](https://oes.inklyre.org/specs/opf/examples)
 on the docs site for a second example mixing co-located and externally
-shared questions, and [OQF's Examples](https://inklyre.github.io/oes/specs/oqf/examples)
+shared questions, and [OQF's Examples](https://oes.inklyre.org/specs/oqf/examples)
 for the referenced questions' own content.
 
 ## 9. Migrating from v0.1.0

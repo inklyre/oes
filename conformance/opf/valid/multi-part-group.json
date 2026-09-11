@@ -1,0 +1,36 @@
+{
+  "opf_version": "0.3.0",
+  "id": "db-final-2024",
+  "title": "Databases — Final Exam 2024",
+  "questions": [
+    {
+      "id": "q1",
+      "path": "questions/normalisation",
+      "points": 10
+    },
+    {
+      "id": "q3",
+      "label": "3",
+      "parts": [
+        {
+          "id": "q3a",
+          "label": "a",
+          "path": "questions/er-diagram",
+          "points": 6
+        },
+        {
+          "id": "q3b",
+          "label": "b",
+          "path": "questions/sql-join",
+          "points": 4
+        },
+        {
+          "id": "q3c",
+          "label": "c",
+          "path": "questions/index-why",
+          "points": 5
+        }
+      ]
+    }
+  ]
+}

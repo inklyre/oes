@@ -37,7 +37,7 @@ OES — it's just being authored inline instead of as its own file.
 
 ```bash
 npx ajv-cli validate \
-  -s https://oes.dev/schemas/oqf/v0.1.0/question.schema.json \
+  -s https://oes.inklyre.org/schemas/oqf/v0.2.0/question.schema.json \
   -d my-first-question.json
 ```
 

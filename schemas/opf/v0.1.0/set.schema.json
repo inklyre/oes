@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/opf/v0.1.0/set.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/opf/v0.1.0/set.schema.json",
   "title": "OPF Set",
   "description": "Schema for set.json, the entry point of an Open Practice Format (OPF) problem set, version 0.1.0.",
   "type": "object",

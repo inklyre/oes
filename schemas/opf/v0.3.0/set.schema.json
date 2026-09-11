@@ -1,0 +1,245 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oes.inklyre.org/schemas/opf/v0.3.0/set.schema.json",
+  "title": "OPF Set",
+  "description": "Schema for set.json, an Open Practice Format (OPF) set, version 0.3.0. A set is an ordered collection of question references (see OQF) plus set-level metadata.",
+  "type": "object",
+  "required": [
+    "opf_version",
+    "id",
+    "title",
+    "questions"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional. Points an editor (e.g. VS Code) at this document's JSON Schema for inline validation/autocomplete. A JSON-tooling convention, not part of the OES content model — an OES parser ignores it like any other unrecognized field."
+    },
+    "opf_version": {
+      "type": "string",
+      "pattern": "^0\\.3\\.\\d+$",
+      "description": "Any 0.3.x patch release of OPF — see the Versioning & Conformance policy for what's allowed to change in a patch."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "license": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "deprecated"
+      ],
+      "description": "Content lifecycle stage. Absent is equivalent to \"published\" — this field exists for a consumer that wants to hide draft/deprecated content or an author's own tooling, not to gate access by itself."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "language": {
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/definitions/source"
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "description": "An ordered sequence of entries. Each is a direct reference to one question, a pool entry that a consumer expands into `select` randomly-chosen questions from `from` at attempt-assembly time, or a group entry carrying `parts` for a multi-part question — all three can be freely mixed and ordered.",
+      "items": {
+        "$ref": "#/definitions/question_entry"
+      }
+    }
+  },
+  "patternProperties": {
+    "^x_[a-z0-9_]+$": {}
+  },
+  "definitions": {
+    "pool_candidate": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": true,
+      "oneOf": [
+        {
+          "required": [
+            "path"
+          ]
+        },
+        {
+          "required": [
+            "question_url"
+          ]
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path, relative to set.json, to a question co-located within this set's own repo. Mutually exclusive with question_url."
+        },
+        "question_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Absolute URL to a question.json hosted in a separate, independently-owned repo. Mutually exclusive with path."
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^sha256-[A-Fa-f0-9]{64}$"
+        }
+      }
+    },
+    "source": {
+      "description": "Where this set was originally sourced or adapted from, if it wasn't authored directly for OES — e.g. produced by an importer against another platform's question bank. Entirely optional; omit for content authored directly. Distinct from this document's own top-level `license`, which describes this OES document's license, not what it was adapted from — the original may be more restrictive (or simply different) and belongs in `source.license` instead.",
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The original content's own URL."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Free-text label for the originating platform or site, e.g. \"Khan Academy\", \"MIT OpenCourseWare\". Deliberately not an enum — OES doesn't hard-code or endorse any specific platform; any importer fills in whatever's accurate."
+        },
+        "license": {
+          "type": "string",
+          "description": "The ORIGINAL content's license or terms of use at the source. Free text, not constrained to SPDX like this document's own `license` field — many platforms' terms of use aren't expressible as a single SPDX identifier."
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date",
+          "description": "When this content was fetched/adapted from the source — provenance, and a signal for how stale this copy might be."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-text context an importer or author wants to record — adaptation details, attribution requirements, anything not covered by the fields above."
+        }
+      }
+    },
+    "question_entry": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": true,
+      "oneOf": [
+        {
+          "required": [
+            "path"
+          ]
+        },
+        {
+          "required": [
+            "question_url"
+          ]
+        },
+        {
+          "required": [
+            "select",
+            "from"
+          ]
+        },
+        {
+          "required": [
+            "parts"
+          ]
+        }
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+          "description": "Stable identifier for this entry within the set. For a direct reference, must match the question's folder name when `path` points to a folder; no such constraint when `path` points directly to a single-file question.json, when using question_url, or for a pool entry."
+        },
+        "title": {
+          "type": "string",
+          "description": "Optional display label, mainly useful for question_url entries so a consumer can render a table of contents without fetching every question first."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path, relative to set.json, to a question co-located within this set's own repo. Mutually exclusive with question_url and with select/from. Two shapes: a path ending in \".json\" points directly to a single-file question (a lone question.json with an inline statement, no folder needed); any other path is a folder, resolved as \"{path}/question.json\" (the traditional shape, for a question that also has its own statement.md and/or assets/)."
+        },
+        "question_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Absolute URL to a question.json hosted in a separate, independently-owned repo (e.g. a shared question bank). Mutually exclusive with path and with select/from."
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^sha256-[A-Fa-f0-9]{64}$",
+          "description": "Optional sha256 hash of the referenced question.json, formatted \"sha256-{hex}\" — e.g. `\"sha256-\" + sha256hex(fileBytes)`. Meaningful mainly with question_url: lets a consumer detect when a shared/external question has changed since this set last pinned it (integrity, caching, and reproducible grading), the same way Subresource Integrity works on the web. Only meaningful alongside question_url; omit for co-located path references, which are already versioned by the set's own repo history."
+        },
+        "points": {
+          "type": "number",
+          "default": 10,
+          "minimum": 0,
+          "description": "How much this entry is worth in this particular set. For a pool entry, this is the per-question value applied uniformly to every question the pool selects, not a total. Not a property of the question itself — see OQF."
+        },
+        "select": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Marks this entry as a pool instead of a direct reference: at attempt-assembly time, a consumer randomly picks this many questions from `from` in place of this one entry. MUST be less than or equal to the length of `from` — not enforceable by schema alone, since it's a cross-field/cross-array constraint; see the Versioning & Conformance page's note on what schema validation does and doesn't catch."
+        },
+        "shuffle": {
+          "type": "boolean",
+          "default": true,
+          "description": "Only meaningful on a pool entry. If true (the default), the selected questions' presentation order is randomized on each assembly; if false, they're presented in `from`'s relative order."
+        },
+        "from": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Only meaningful on a pool entry: the candidate questions it selects from. Same reference shape as a direct entry (id + path|question_url + optional content_hash), minus points and title — a pool's own `points` applies uniformly to whichever questions get selected, and a pool has no per-candidate display label since only the selected subset is ever shown.",
+          "items": {
+            "$ref": "#/definitions/pool_candidate"
+          }
+        },
+        "label": {
+          "type": "string",
+          "description": "Display label for this entry as it should be numbered to a learner — \"3\" for a question, \"a\" or \"ii\" for a part. Optional: a consumer derives a, b, c… from position when absent. Explicit labels exist for fidelity to a real paper's numbering, which is often neither sequential nor alphabetic. Display only — `id` remains the identifier."
+        },
+        "parts": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Makes this entry a multi-part question: an ordered list of sub-entries presented together under one heading, as a past paper's Q3 (a)/(b)/(c). Each part is an ordinary entry, so parts may be of different question types and a part may itself have parts. Parts MUST NOT be reordered, and a consumer shuffling a set MUST move the whole group as a unit — later parts routinely refer to earlier ones by label. A group carries no `points` of its own; its total is the sum of its parts. A shared stem belongs on each part's own question via OQF's `stimulus`, not here — that is what makes each part independently resolvable.",
+          "items": {
+            "$ref": "#/definitions/question_entry"
+          }
+        },
+        "answer_any": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "\"Answer any N of these parts.\" All parts are shown and the learner chooses — deliberately distinct from a pool's `select`, where the system picks at random and the learner never sees the rest. MUST be <= the number of parts; not enforceable by schema alone, see the lint tooling. Advisory authored intent a platform MAY enforce, the same status as `time_limit_mins`."
+        }
+      }
+    }
+  }
+}

@@ -44,7 +44,7 @@ a lesson's `items[]` entries (`type: "resource"`) choose between the two.
 
 Metadata for the document: title, description, `document_url` (required
 — where the document is actually hosted), page count, table of contents.
-See [Schema Reference](./schema-reference#resourcejson).
+See [Schema Reference](./schema-reference#resource-json).
 
 ### `assets/` (optional)
 

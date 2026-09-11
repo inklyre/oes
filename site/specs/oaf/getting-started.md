@@ -50,7 +50,7 @@ Note the plain Markdown link to the official docs — that's how OAF handles
 
 ```bash
 npx ajv-cli validate \
-  -s https://oes.dev/schemas/oaf/v0.1.0/article.schema.json \
+  -s https://oes.inklyre.org/schemas/oaf/v0.2.0/article.schema.json \
   -d article.json
 ```
 

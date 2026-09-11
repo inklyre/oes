@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/ocf/v0.3.0/course.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json",
   "title": "OCF",
   "description": "Schema for the three Open Course Format (OCF) document types, version 0.3.0: course.json, module.json, and lesson.json.",
   "oneOf": [

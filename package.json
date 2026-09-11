@@ -1,7 +1,7 @@
 {
   "name": "oes",
-  "version": "0.1.0",
-  "description": "Open Education Standards — open specifications for education technology. Reference tooling built on this spec lives in github.com/inklyre/oes-tooling.",
+  "version": "0.2.0",
+  "description": "Open Education Standards \u2014 open specifications for education technology. Reference tooling built on this spec lives in github.com/inklyre/oes-tooling.",
   "private": true,
   "type": "module",
   "scripts": {

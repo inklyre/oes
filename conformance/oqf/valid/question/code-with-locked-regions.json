@@ -1,11 +1,13 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "two-sum-locked",
   "type": "code",
   "title": "Two Sum (locked boilerplate)",
   "difficulty": "easy",
   "type_config": {
-    "languages": ["python"],
+    "languages": [
+      "python"
+    ],
     "starter_code": {
       "python": {
         "prefix": "class Solution:\n",
@@ -14,8 +16,26 @@
       }
     },
     "test_cases": [
-      { "id": "tc1", "input": { "nums": [2, 7, 11, 15], "target": 9 }, "expected": [0, 1], "is_hidden": false }
+      {
+        "id": "tc1",
+        "input": {
+          "nums": [
+            2,
+            7,
+            11,
+            15
+          ],
+          "target": 9
+        },
+        "expected": [
+          0,
+          1
+        ],
+        "is_hidden": false
+      }
     ]
   },
-  "statement": { "file": "statement.md" }
+  "statement": {
+    "file": "statement.md"
+  }
 }

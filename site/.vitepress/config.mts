@@ -7,6 +7,12 @@ export default defineConfig({
   lastUpdated: true,
   cleanUrls: true,
 
+  // public/{downloads,extensions,schemas} are symlinks to the repo root, so
+  // their Markdown would otherwise be rendered as site pages at /public/...
+  // as well as served as the static files they actually are. Those copies
+  // are duplicate content with broken relative links — exclude them.
+  srcExclude: ['public/**'],
+
   head: [
     ['link', { rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
   ],

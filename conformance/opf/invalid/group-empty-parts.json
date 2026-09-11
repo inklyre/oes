@@ -1,0 +1,12 @@
+{
+  "opf_version": "0.3.0",
+  "id": "empty-group",
+  "title": "A group with no parts",
+  "questions": [
+    {
+      "id": "q3",
+      "label": "3",
+      "parts": []
+    }
+  ]
+}

@@ -32,9 +32,9 @@ features:
 | Spec | Description | Version | Status |
 |---|---|---|---|
 | [OCF — Open Course Format](/specs/ocf/) | Courses of modules and lessons, each an ordered sequence of items linking OAF articles, OVF video lessons, OPF practice sets, and ORF reference documents | 0.3.0 | Draft |
-| [OPF — Open Practice Format](/specs/opf/) | Practice sets: ordered collections of OQF questions plus set-level metadata | 0.2.0 | Draft |
-| [OQF — Open Question Format](/specs/oqf/) | A single question: 11 types, static files, reusable across sets | 0.1.0 | Draft |
-| [OAF — Open Article Format](/specs/oaf/) | A single written article — real authored content, not a link | 0.1.0 | Draft |
+| [OPF — Open Practice Format](/specs/opf/) | Practice sets: ordered collections of OQF questions plus set-level metadata | 0.3.0 | Draft |
+| [OQF — Open Question Format](/specs/oqf/) | A single question: 11 types, static files, reusable across sets | 0.2.0 | Draft |
+| [OAF — Open Article Format](/specs/oaf/) | A single written article — real authored content, not a link | 0.2.0 | Draft |
 | [OVF — Open Video Format](/specs/ovf/) | A single video lesson: metadata, transcript, and chapters around an externally-hosted video | 0.1.0 | Draft |
 | [ORF — Open Resource Format](/specs/orf/) | A single reference document (PDF, ebook, paper): metadata, page count, and a table of contents around an externally-hosted file | 0.1.0 | Draft |
 

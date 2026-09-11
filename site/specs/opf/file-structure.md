@@ -45,7 +45,7 @@ on presentation order.
 The entry point. Any consumer (LMS, CLI tool, renderer) fetches this file
 first. It carries set-level metadata and the ordered list of questions,
 each with an `id`, optional `points`, and exactly one of `path` or
-`question_url`. See [Schema Reference](./schema-reference#setjson) for the
+`question_url`. See [Schema Reference](./schema-reference#set-json) for the
 full field list.
 
 ## Path resolution rules

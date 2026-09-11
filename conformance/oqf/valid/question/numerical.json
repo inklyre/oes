@@ -1,5 +1,5 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "avg-lookup-time",
   "type": "numerical",
   "title": "Average lookup time in a well-sized hash table",

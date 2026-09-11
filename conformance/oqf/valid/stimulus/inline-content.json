@@ -1,0 +1,6 @@
+{
+  "oqf_version": "0.2.0",
+  "id": "bookstore-schema",
+  "title": "Online bookstore schema",
+  "content": "An online bookstore stores books, authors, and orders."
+}

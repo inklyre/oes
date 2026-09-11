@@ -20,13 +20,30 @@ questions instead.
 
 | File | Purpose |
 |---|---|
-| `stimulus.json` | Metadata: id, optional title, authors, license, tags. |
-| `stimulus.md` | The shared prompt, as pure Markdown — same conventions as `statement.md` (see [Markdown Conventions](/markdown-conventions) for figures and math). |
+| `stimulus.json` | Metadata: id, optional title, authors, license, tags — and `content`, when the prose is held inline. |
+| `stimulus.md` | The shared prompt, as pure Markdown — same conventions as `statement.md` (see [Markdown Conventions](/markdown-conventions) for figures and math). Present only when `content` uses the `{ "file": "stimulus.md" }` form. |
 
-A stimulus with no `stimulus.md` at all is valid — some stimuli are purely
-an image or a dataset file living in `assets/`, referenced from each
+A stimulus with no prose at all is valid — some stimuli are purely an
+image or a dataset file living in `assets/`, referenced from each
 question's own `type_config` (e.g. a `diagram` question's `image` field
 could point into a shared stimulus's `assets/` folder instead of its own).
+
+The prose itself goes in `content`, either inline or as a file:
+
+```json
+{ "oqf_version": "0.2.0", "id": "bookstore-schema",
+  "content": "An online bookstore stores books, authors, and orders." }
+
+{ "oqf_version": "0.2.0", "id": "reading-passage-1",
+  "content": { "file": "stimulus.md" } }
+```
+
+**Prefer the inline form for a stimulus referenced by `stimulus_url`.** A
+`content_hash` on that reference covers `stimulus.json` only — with the
+prose in a separate file, the passage every question depends on can be
+swapped while the hash still verifies. That matters more here than
+anywhere else in OES, because a stimulus is the one document the spec
+actively recommends hosting independently for reuse across sets.
 
 ## Referencing a stimulus from a question
 

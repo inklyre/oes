@@ -1,6 +1,6 @@
 # Question Types
 
-OQF v0.1.0 defines 11 question types. Every `question.json` declares its
+OQF v0.2.0 defines 11 question types. Every `question.json` declares its
 type via the top-level `type` field, and carries type-specific configuration
 under `type_config`. This page documents every field of every
 `type_config` shape, with a complete example for each.
@@ -183,7 +183,7 @@ One or more blanks embedded in `statement.md`, each marked inline with
 |---|---|---|---|
 | `blanks` | array of blank objects | yes | See below. |
 | `blanks[].id` | string | yes | Matches a `{{id}}` marker in `statement.md`. |
-| `blanks[].answer` | string | yes | The accepted answer. |
+| `blanks[].answer` | string \| array of string | yes, unless secured | One accepted answer, or a list of them — a response matching **any** member is correct. Required on every blank unless this question sets a top-level `answer_key`, in which case it MUST be omitted here and supplied from there instead, keyed by `id`. |
 | `blanks[].type` | string | yes | One of `text`, `expression`, `number`. Hints a renderer how to validate/format input. |
 | `blanks[].case_sensitive` | boolean | no | Only meaningful for `type: "text"`. Default `true`. |
 
@@ -197,7 +197,7 @@ For an array of size `n`, the maximum number of comparisons needed is
 `question.json`:
 ```json
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "binary-search-complexity",
   "type": "fill_blank",
   "title": "Binary search complexity",
@@ -205,12 +205,25 @@ For an array of size `n`, the maximum number of comparisons needed is
   "statement": { "file": "statement.md" },
   "type_config": {
     "blanks": [
-      { "id": "b1", "answer": "O(log n)", "type": "text", "case_sensitive": false },
+      { "id": "b1", "answer": ["O(log n)", "O(logn)", "\u0398(log n)"], "type": "text", "case_sensitive": false },
       { "id": "b2", "answer": "ceil(log2(n))", "type": "expression" }
     ]
   }
 }
 ```
+
+**List every spelling you would accept from a person at a whiteboard.**
+A single string accepts exactly one, which silently marks correct
+responses wrong — `O(log n)` and `O(logn)` differ by a space, and a
+learner writing the tighter bound `\u0398(log n)` is not wrong. There is no
+fuzzy matching: matching is exact against each member, with
+`case_sensitive` applied uniformly to all of them, so a blank is only as
+forgiving as its list.
+
+For `type: "number"`, list the forms you would accept (`"0.5"`, `".5"`)
+— a blank compares text, not magnitudes. When the tolerance genuinely
+matters, [`numerical`](#numerical-numeric-answer-with-tolerance) is the
+right type instead.
 
 ## `code` — Write code, executed against test cases
 
@@ -474,7 +487,7 @@ varies too much for a fixed absolute margin to make sense:
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `max_words` | integer | no | Suggested word limit shown to the learner. |
-| `grading` | string | yes | Must be `"manual"` in v0.1.0. |
+| `grading` | string | yes | Must be `"manual"` in v0.2.0. |
 | `rubric` | string or structured object | no | Grading guidance — a plain string, or `{criteria: [{name, description?, points?}]}`. See below. |
 
 ```json
@@ -515,7 +528,7 @@ varies too much for a fixed absolute margin to make sense:
 |---|---|---|---|
 | `min_words` | integer | no | Minimum expected word count. |
 | `max_words` | integer | no | Maximum expected word count. |
-| `grading` | string | yes | Must be `"manual"` in v0.1.0. |
+| `grading` | string | yes | Must be `"manual"` in v0.2.0. |
 | `rubric` | string or structured object | no | Grading criteria — same shape as `short_answer`'s `rubric` above, string or `{criteria: [...]}`. |
 
 ```json
@@ -539,7 +552,7 @@ varies too much for a fixed absolute margin to make sense:
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `image` | string | yes | Path, relative to the question's folder, to the image asset (e.g. `assets/diagram.png`). |
+| `image` | string \| object | yes | Path, relative to the question's folder, to the image asset (e.g. `assets/diagram.png`). May instead be `{ "file": "assets/diagram.png", "content_hash": "sha256-…" }` — use that form when the question is fetched by `question_url`, since the image is then resolved relative to that URL and would otherwise be unverified. See [Content integrity](/conformance#content-integrity-for-external-references). |
 | `labels` | array of label objects | yes | See below. |
 | `labels[].id` | string | yes | Unique within the question. |
 | `labels[].answer` | string | yes, unless secured | The correct label text for this point. Required on every label here unless this question sets a top-level `answer_key`, in which case it MUST be omitted from every label here and supplied from there instead, keyed by `id`. |

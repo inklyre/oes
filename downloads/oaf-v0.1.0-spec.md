@@ -1,8 +1,8 @@
 # OAF — Open Article Format
 
-**Version 0.1.0 · Status: Draft · License: CC0 1.0**
+**Version 0.1.0 · Status: Draft · License: CC BY 4.0**
 
-Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
+Part of [OES — Open Education Standards](https://oes.inklyre.org/).
 
 ## Table of contents
 
@@ -22,7 +22,7 @@ OAF (Open Article Format) is an open specification for a single written
 article — the actual prose a learner reads, stored as static files. It's
 real authored content: a title plus a Markdown file, not a link to
 something hosted elsewhere. An article can be written for one specific
-[OCF](https://inklyre.github.io/oes/specs/ocf/) lesson, or authored once
+[OCF](https://oes.inklyre.org/specs/ocf/) lesson, or authored once
 and referenced from several lessons across different courses.
 
 If an article needs to point at something else on the web for further

@@ -66,13 +66,13 @@ The entry point. Carries course-level metadata, the ordered list of
 modules (order determines the course's module sequence), and optionally a
 list of `prerequisites` — other courses, referenced by URL, that a learner
 should complete first. See
-[Schema Reference](./schema-reference#coursejson).
+[Schema Reference](./schema-reference#course-json).
 
 ### `module.json`
 
 Module-level metadata and the ordered list of lessons within it (order
 determines the module's lesson sequence). See
-[Schema Reference](./schema-reference#modulejson).
+[Schema Reference](./schema-reference#module-json).
 
 ### `lesson.json`
 
@@ -82,7 +82,7 @@ lessons ([OVF](/specs/ovf/) references), and practice sets
 ([OPF](/specs/opf/) references) a learner actually goes through, in that
 order — and `related` (suggested material beyond this lesson's own
 content — a related video, a recommended book, another course). See
-[Schema Reference](./schema-reference#lessonjson).
+[Schema Reference](./schema-reference#lesson-json).
 
 There is deliberately no `content.md` on a lesson as of v0.2.0 — a
 lesson's written content is one or more `type: "article"` items. A

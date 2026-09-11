@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/oqf/v0.1.0/question.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/oqf/v0.1.0/question.schema.json",
   "title": "OQF Question",
   "description": "Schema for question.json, an individual question in the Open Question Format (OQF), version 0.1.0. A question can be referenced from an OPF set (co-located via a relative path, or hosted independently and referenced by URL).",
   "type": "object",

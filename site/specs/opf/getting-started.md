@@ -51,7 +51,7 @@ walkthrough, including when a question needs a folder instead:
   "title": "My First Practice Set",
   "description": "A minimal OPF set with one question.",
   "authors": ["your-github-username"],
-  "license": "CC0-1.0",
+  "license": "CC-BY-4.0",
   "language": "en",
   "questions": [
     { "id": "two-sum", "path": "questions/two-sum.json", "points": 10 }
@@ -66,11 +66,11 @@ single-file question, not a folder to look inside.
 
 ```bash
 npx ajv-cli validate \
-  -s https://oes.dev/schemas/opf/v0.2.0/set.schema.json \
+  -s https://oes.inklyre.org/schemas/opf/v0.3.0/set.schema.json \
   -d set.json
 
 npx ajv-cli validate \
-  -s https://oes.dev/schemas/oqf/v0.1.0/question.schema.json \
+  -s https://oes.inklyre.org/schemas/oqf/v0.2.0/question.schema.json \
   -d questions/two-sum.json
 ```
 

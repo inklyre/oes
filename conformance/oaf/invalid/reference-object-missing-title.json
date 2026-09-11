@@ -1,8 +1,11 @@
 {
-  "oaf_version": "0.1.0",
+  "oaf_version": "0.2.0",
   "id": "variables-and-types",
   "title": "Variables and Types",
   "references": [
-    { "type": "book", "isbn": "978-1492056355" }
+    {
+      "type": "book",
+      "isbn": "978-1492056355"
+    }
   ]
 }

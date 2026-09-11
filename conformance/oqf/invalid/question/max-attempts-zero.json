@@ -1,9 +1,11 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "bad-max-attempts",
   "type": "numerical",
   "title": "Bad Max Attempts",
   "max_attempts": 0,
   "statement": "1 + 1?",
-  "type_config": { "answer": 2 }
+  "type_config": {
+    "answer": 2
+  }
 }

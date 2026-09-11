@@ -60,7 +60,7 @@ Add chapter markers to `video.json`:
 
 ```bash
 npx ajv-cli validate \
-  -s https://oes.dev/schemas/ovf/v0.1.0/video.schema.json \
+  -s https://oes.inklyre.org/schemas/ovf/v0.1.0/video.schema.json \
   -d video.json
 ```
 

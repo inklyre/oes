@@ -1,0 +1,6 @@
+{
+  "oaf_version": "0.2.0",
+  "id": "short-note",
+  "title": "A short note",
+  "content": "Short enough to live inline rather than in its own file."
+}

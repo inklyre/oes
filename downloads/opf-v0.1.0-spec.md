@@ -2,8 +2,8 @@
 
 **Version:** 0.1.0
 **Status:** Draft
-**License:** CC0 1.0 (this specification document)
-**Part of:** [OES — Open Education Standards](https://inklyre.github.io/oes/)
+**License:** CC BY 4.0 (this specification document)
+**Part of:** [OES — Open Education Standards](https://oes.inklyre.org/)
 
 This document is a complete, self-contained specification for OPF v0.1.0.
 It is intended to be implementable by a developer with no other reference
@@ -103,7 +103,7 @@ problem's own folder — never assume a hosting root.
   "title": "My First Practice Set",
   "description": "A minimal OPF set with one problem.",
   "authors": ["your-github-username"],
-  "license": "CC0-1.0",
+  "license": "CC-BY-4.0",
   "language": "en",
   "problems": [
     { "id": "two-sum", "path": "problems/two-sum" }
@@ -393,7 +393,7 @@ option supports it.
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/opf/v0.1.0/set.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/opf/v0.1.0/set.schema.json",
   "title": "OPF Set",
   "description": "Schema for set.json, the entry point of an Open Practice Format (OPF) problem set, version 0.1.0.",
   "type": "object",
@@ -431,7 +431,7 @@ option supports it.
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/opf/v0.1.0/problem.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/opf/v0.1.0/problem.schema.json",
   "title": "OPF Problem",
   "type": "object",
   "required": ["opf_version", "id", "type", "title", "type_config"],
@@ -834,4 +834,4 @@ illustrate it with at least one real-world system.
 ---
 
 *End of OPF v0.1.0 specification. Part of OES — Open Education Standards,
-released under CC0 1.0.*
+released under CC BY 4.0.*

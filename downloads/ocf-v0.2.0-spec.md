@@ -1,8 +1,8 @@
 # OCF — Open Course Format
 
-**Version 0.2.0 · Status: Draft · License: CC0 1.0**
+**Version 0.2.0 · Status: Draft · License: CC BY 4.0**
 
-Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
+Part of [OES — Open Education Standards](https://oes.inklyre.org/).
 
 ## Table of contents
 
@@ -24,9 +24,9 @@ OCF (Open Course Format) structures a course — a sequence of modules and
 lessons — as static files. A course owns no content of its own beyond
 sequencing: a course sequences modules, a module sequences lessons, and a
 lesson is itself a collection of the content types OES defines —
-[OAF](https://inklyre.github.io/oes/specs/oaf/) articles,
-[OVF](https://inklyre.github.io/oes/specs/ovf/) video lessons, and
-[OPF](https://inklyre.github.io/oes/specs/opf/) practice sets —
+[OAF](https://oes.inklyre.org/specs/oaf/) articles,
+[OVF](https://oes.inklyre.org/specs/ovf/) video lessons, and
+[OPF](https://oes.inklyre.org/specs/opf/) practice sets —
 referenced rather than owned.
 
 Philosophy: static files, not a database; git-native; no database required;
@@ -159,7 +159,7 @@ entry is something the lesson merely points at for a learner who wants
 more. The schema can't enforce this distinction — it's a modeling
 discipline, not a validation rule.
 
-See the [full Examples page](https://inklyre.github.io/oes/specs/ocf/examples)
+See the [full Examples page](https://oes.inklyre.org/specs/ocf/examples)
 on the docs site for the complete six-lesson course.
 
 ## 9. Migrating from v0.1.0

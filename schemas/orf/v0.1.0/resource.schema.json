@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/orf/v0.1.0/resource.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/orf/v0.1.0/resource.schema.json",
   "title": "ORF Resource",
   "description": "Schema for resource.json, a reference document (a PDF, an ebook, a paper, slides) in the Open Resource Format (ORF), version 0.1.0. document_url points at wherever the actual file is hosted and is always required as the canonical source. Distinct from OAF: an ORF resource is a document OES doesn't own or render as prose — a genuine written article always belongs in OAF instead. A resource MAY additionally carry a local_path to a bundled copy of the file, for fully offline/portable packages, when downloadable permits it.",
   "type": "object",

@@ -44,7 +44,7 @@ lesson's `video_lessons[]` entries choose between the two.
 
 Metadata for the video: title, description, `video_url` (required —
 where the video is actually hosted), duration, chapters. See
-[Schema Reference](./schema-reference#videojson).
+[Schema Reference](./schema-reference#video-json).
 
 ### `transcript.md` (optional)
 
@@ -88,7 +88,7 @@ local copy:
   authored content, since this is opt-in, not the default.
 
 This is the same reasoning [OPF's questions](/specs/opf/authoring) and
-[OCF's practice sets](/specs/ocf/index) already apply to co-located vs.
+[OCF's practice sets](/specs/ocf/) already apply to co-located vs.
 externally-referenced content, extended to handle the one content type
 (video) that also has real file-size and redistribution-rights concerns a
 question or article never does.

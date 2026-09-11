@@ -1,9 +1,10 @@
 # Versioning & Conformance
 
 This page applies to every OES spec — [OCF](/specs/ocf/), [OPF](/specs/opf/),
-[OQF](/specs/oqf/), [OAF](/specs/oaf/), and [OVF](/specs/ovf/) — the same
+[OQF](/specs/oqf/), [OAF](/specs/oaf/), [OVF](/specs/ovf/), and
+[ORF](/specs/orf/) — the same
 way the <a href="/extensions/registry.md">extension mechanism</a> and the local/
-external reference convention are shared across all five rather than
+external reference convention are shared across all six rather than
 redefined per spec.
 
 [[toc]]
@@ -28,7 +29,7 @@ sentence to be rewritten.
 
 ## Scope: content, not runtime state
 
-All five OES specs describe **content** — static documents, authored once,
+All six OES specs describe **content** — static documents, authored once,
 versioned with git, identical for every learner who reads them. That's a
 deliberate, load-bearing choice, not an oversight, and it draws a firm
 line around what OES will and won't take on.
@@ -36,16 +37,16 @@ line around what OES will and won't take on.
 **Explicitly out of scope: progress, completion, attempts, scores, and
 any other per-learner runtime state.** Whether a specific person answered
 a specific question correctly, how far they've gotten through a course,
-what their current grade is — none of that is describable in OCF, OPF,
-OQF, OAF, or OVF, and it never will be. This data is fundamentally
+what their current grade is — none of that is describable in any OES
+spec, and it never will be. This data is fundamentally
 different from content on every axis that matters here: it's per-learner
 rather than shared, generated continuously at runtime rather than
 authored once, and needs to be queried/updated live rather than fetched
-and cached. Folding it into these five specs would mean giving up the
+and cached. Folding it into these six specs would mean giving up the
 "static files in git" model that makes them portable and swappable
 between hosting providers in the first place.
 
-This is a deliberate boundary, not a gap waiting to be filled by a sixth
+This is a deliberate boundary, not a gap waiting to be filled by another
 OES spec. An application built on OES is expected to track progress and
 results itself, however fits its own architecture — a database, an
 existing standard like [xAPI](https://xapi.com/) recording statements
@@ -67,9 +68,11 @@ scale. What OQF *does* provide — `points` per test case, a structured
 `rubric`, `points` per question in OPF — is optional raw material a
 scoring policy can use; it never dictates the policy itself.
 
-Every OES spec is independently versioned (`oqf_version`, `opf_version`,
-`oaf_version`, `ocf_version`, `ovf_version`), and every one of
-them is currently **`0.x`, Draft status** — pre-1.0. That status has a
+## Versioning policy
+
+Every OES spec is independently versioned (`ocf_version`, `opf_version`,
+`oqf_version`, `oaf_version`, `ovf_version`, `orf_version`), and every one
+of them is currently **`0.x`, Draft status** — pre-1.0. That status has a
 direct, practical consequence for how strictly a document's version field
 should be checked.
 
@@ -106,34 +109,78 @@ changelog will state when it reaches 1.0.
 
 Each spec keeps its own version field — `oqf_version` only changes when
 OQF's own shape changes, and a document never needs re-stamping just
-because a sibling spec moved. But the five specs are not independent in
-practice: OCF lessons reference OAF/OVF/OQF documents, OPF sets reference
-OQF questions, and a tool consuming "OES" is really consuming all five
-together. Tracking five version numbers separately, with no single
+because a sibling spec moved. But the six specs are not independent in
+practice: OCF lessons reference OAF/OVF/OPF/ORF documents, OPF sets
+reference OQF questions, and a tool consuming "OES" is really consuming
+all six together. Tracking six version numbers separately, with no single
 statement of which combinations are actually tested and meant to work
 together, makes it hard for a tool author to be sure what they're
 building against.
 
 **OES itself carries one version number**, independent of and layered on
-top of the five per-spec ones — tracked as this repository's own
+top of the six per-spec ones — tracked as this repository's own
 `package.json` version and tagged in git on every release. It names a
 specific, tested combination of sub-spec versions, published as a
 compatibility table on this page:
 
-| OES version | OCF | OPF | OQF | OAF | OVF |
-|---|---|---|---|---|---|
-| `0.1.0` (current, pre-release) | `0.2.x` | `0.2.x` | `0.1.x` | `0.1.x` | `0.1.x` |
+| OES version | OCF | OPF | OQF | OAF | OVF | ORF |
+|---|---|---|---|---|---|---|
+| `0.2.0` (current, pre-release) | `0.3.x` | `0.3.x` | `0.2.x` | `0.2.x` | `0.1.x` | `0.1.x` |
+| `0.1.0` | `0.3.x` | `0.2.x` | `0.1.x` | `0.1.x` | `0.1.x` | `0.1.x` |
 
 The OES version bumps whenever **any** sub-spec changes, even if the
-other four are byte-identical to the previous release — that bump is what
+other five are byte-identical to the previous release — that bump is what
 makes "OES v0.1.0" a precise, checkable claim rather than a vague label.
 A tool that wants certainty pins to an OES version and reads this table,
-rather than tracking five independent compatibility ranges itself. This
+rather than tracking six independent compatibility ranges itself. This
 is why an *unrelated* spec's patch doesn't force any existing course/set/
 question/article/video file to change: the OES version is a release name
 for a tested bundle, not a field embedded in content — so a `course.json`
 authored under OES `0.1.0` stays exactly as valid under OES `0.1.1` if
 OCF's own shape didn't move, with nothing to edit.
+
+## Conformance profiles
+
+With six specs, "supports OES" says almost nothing. A learner-facing app
+that renders courses and articles but has no question engine is a
+perfectly reasonable OES consumer; so is a question bank that never
+renders a course. Profiles let a consumer state what it implements and an
+author know what will render.
+
+Profiles are **not a ladder**. Media and practice are genuinely
+independent — an app may do either, both, or neither — so there is one
+mandatory base plus named capabilities a consumer declares alongside it.
+
+| Profile | Requires | What it means |
+|---|---|---|
+| **Core** | [OCF](/specs/ocf/) + [OAF](/specs/oaf/) + [ORF](/specs/orf/) + [Markdown Conventions](/markdown-conventions) | Deliver a reading-based course: courses, modules, lessons, written articles, and reference documents. **Every conformant consumer MUST implement Core.** |
+| **+Media** | [OVF](/specs/ovf/) | Video lessons, including chapters and caption tracks. |
+| **+Practice** | [OPF](/specs/opf/) + [OQF](/specs/oqf/) | Render and score self-check questions whose answers are in the document. |
+| **+Graded** | `answer_key` handling | Secured questions, where the answer lives outside the document a learner can fetch. Requires **+Practice**. |
+
+A consumer states its profile as Core plus the capabilities it has, e.g.
+"OES 0.2.0 Core +Practice" or "OES 0.2.0 Core +Media +Practice +Graded".
+
+### Question types within +Practice
+
+Two question types need infrastructure that most consumers will never
+have, and requiring them would make the profile meaningless. They are
+therefore declared separately rather than being part of +Practice:
+
+- **Required by +Practice:** `mcq`, `msq`, `fill_blank`, `numerical`,
+  `match`, `order`, `diagram`, `short_answer`, `essay`. All of these are
+  renderable and scorable with no external infrastructure —
+  `short_answer` and `essay` are `grading: "manual"`, so they need a
+  human reader, which is a workflow rather than a system dependency.
+- **Declared separately:** `code` (needs a sandboxed execution
+  environment) and `submission` (needs file storage and upload
+  handling). A consumer supporting them says so explicitly, e.g.
+  "+Practice +code".
+
+A consumer MUST NOT silently skip a question type it does not support.
+It SHOULD surface the unsupported type the way it surfaces an unsupported
+version — as a distinct, reportable condition — so an author discovers
+that half their set is invisible rather than assuming it rendered.
 
 ## Content integrity for external references
 

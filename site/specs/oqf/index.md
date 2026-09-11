@@ -4,7 +4,7 @@
 
 **Version:** 0.1.0 &nbsp;·&nbsp; **Status:** Draft &nbsp;·&nbsp; **License:** CC BY 4.0
 
-<a class="oqf-download-btn" href="/downloads/oqf-v0.1.0-spec.md" download>⬇ Download full spec (single Markdown file)</a>
+<a class="oqf-download-btn" href="/downloads/oqf-v0.2.0-spec.md" download>⬇ Download full spec (single Markdown file)</a>
 
 </div>
 

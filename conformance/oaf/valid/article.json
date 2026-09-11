@@ -1,11 +1,19 @@
 {
-  "oaf_version": "0.1.0",
+  "oaf_version": "0.2.0",
   "id": "variables-and-types",
   "title": "Variables and Types",
+  "content": {
+    "file": "content.md"
+  },
   "description": "Python's core built-in types and how variables work.",
-  "authors": ["ankit-ksh"],
+  "authors": [
+    "ankit-ksh"
+  ],
   "license": "CC-BY-4.0",
-  "tags": ["python", "fundamentals"],
+  "tags": [
+    "python",
+    "fundamentals"
+  ],
   "language": "en",
   "estimated_mins": 5,
   "references": [
@@ -13,7 +21,9 @@
     {
       "title": "Fluent Python",
       "type": "book",
-      "authors": ["Luciano Ramalho"],
+      "authors": [
+        "Luciano Ramalho"
+      ],
       "isbn": "978-1492056355",
       "publisher": "O'Reilly Media",
       "year": 2022,
@@ -21,6 +31,10 @@
     }
   ],
   "related": [
-    { "type": "video", "title": "Python Types in 5 Minutes", "url": "https://www.youtube.com/watch?v=x7X9w_GIm1s" }
+    {
+      "type": "video",
+      "title": "Python Types in 5 Minutes",
+      "url": "https://www.youtube.com/watch?v=x7X9w_GIm1s"
+    }
   ]
 }

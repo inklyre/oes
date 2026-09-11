@@ -1,14 +1,34 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "two-sum-secure",
   "type": "code",
   "title": "Two Sum (graded)",
   "statement": "Given an array of integers nums and an integer target, return the indices of the two numbers that add up to target.",
-  "answer_key": { "file": "answer-key.json" },
+  "answer_key": {
+    "file": "answer-key.json"
+  },
   "type_config": {
-    "languages": ["python"],
+    "languages": [
+      "python"
+    ],
     "test_cases": [
-      { "id": "tc1", "input": { "nums": [2, 7, 11, 15], "target": 9 }, "expected": [0, 1], "is_hidden": false }
+      {
+        "id": "tc1",
+        "input": {
+          "nums": [
+            2,
+            7,
+            11,
+            15
+          ],
+          "target": 9
+        },
+        "expected": [
+          0,
+          1
+        ],
+        "is_hidden": false
+      }
     ],
     "solutions": {
       "python": "def two_sum(nums, target):\n    pass\n"

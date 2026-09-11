@@ -2,8 +2,8 @@
 
 **Version:** 0.1.0
 **Status:** Draft
-**License:** CC0 1.0 (this specification document)
-**Part of:** [OES — Open Education Standards](https://inklyre.github.io/oes/)
+**License:** CC BY 4.0 (this specification document)
+**Part of:** [OES — Open Education Standards](https://oes.inklyre.org/)
 
 This document is a complete, self-contained specification for OCF v0.1.0.
 It is intended to be implementable by a developer with no other reference
@@ -115,7 +115,7 @@ since they typically point at a different repository entirely.
   "title": "My First Course",
   "description": "A minimal OCF course with one module and one lesson.",
   "authors": ["your-github-username"],
-  "license": "CC0-1.0",
+  "license": "CC-BY-4.0",
   "language": "en",
   "level": "beginner",
   "estimated_hours": 0.5,
@@ -212,7 +212,7 @@ a top-level `oneOf`. Validate a specific file type against
 ```json
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/ocf/v0.1.0/course.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/ocf/v0.1.0/course.schema.json",
   "title": "OCF Course",
   "definitions": {
     "course": {
@@ -554,4 +554,4 @@ to progress. Module and lesson order is entirely determined by array order
 ---
 
 *End of OCF v0.1.0 specification. Part of OES — Open Education Standards,
-released under CC0 1.0.*
+released under CC BY 4.0.*

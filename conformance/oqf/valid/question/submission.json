@@ -1,18 +1,30 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "capstone-project",
   "type": "submission",
   "title": "Build and deploy a small REST API",
   "difficulty": "hard",
   "statement": "Design, build, and deploy a REST API for a simple todo-list service with at least three endpoints. Submit a link to your deployed API and its source repository.",
   "type_config": {
-    "formats": ["url", "git_repo"],
+    "formats": [
+      "url",
+      "git_repo"
+    ],
     "grading": "manual",
     "rubric": {
       "criteria": [
-        { "name": "API is deployed and reachable", "points": 20 },
-        { "name": "Endpoints follow REST conventions", "points": 20 },
-        { "name": "Code is organized and readable", "points": 10 }
+        {
+          "name": "API is deployed and reachable",
+          "points": 20
+        },
+        {
+          "name": "Endpoints follow REST conventions",
+          "points": 20
+        },
+        {
+          "name": "Code is organized and readable",
+          "points": 10
+        }
       ]
     }
   }

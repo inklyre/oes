@@ -2,15 +2,15 @@
 
 Machine-readable JSON Schema (draft-07):
 
-- `question.json` → [`schemas/oqf/v0.1.0/question.schema.json`](/schemas/oqf/v0.1.0/question.schema.json)
-- `stimulus.json` → [`schemas/oqf/v0.1.0/stimulus.schema.json`](/schemas/oqf/v0.1.0/stimulus.schema.json)
+- `question.json` → [`schemas/oqf/v0.2.0/question.schema.json`](/schemas/oqf/v0.2.0/question.schema.json)
+- `stimulus.json` → [`schemas/oqf/v0.2.0/stimulus.schema.json`](/schemas/oqf/v0.2.0/stimulus.schema.json)
 
 ## `question.json`
 
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `$schema` | string | no | Optional editor hint (e.g. VS Code) pointing at this document's JSON Schema for inline validation/autocomplete. Not part of the OES content model. |
-| `oqf_version` | string | **yes** | Any `0.1.x` — see [Versioning & Conformance](/conformance#versioning-policy). |
+| `oqf_version` | string | **yes** | Any `0.2.x` — see [Versioning & Conformance](/conformance#versioning-policy). |
 | `id` | string | **yes** | Kebab-case. Matches the question's folder name when co-located via `path`. |
 | `type` | string | **yes** | One of the [11 question types](./question-types). |
 | `title` | string | **yes** | Human-readable title. |
@@ -59,16 +59,18 @@ secure/proctored assessments. See
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `$schema` | string | no | Optional editor hint (e.g. VS Code) pointing at this document's JSON Schema for inline validation/autocomplete. Not part of the OES content model. |
-| `oqf_version` | string | **yes** | Any `0.1.x`. |
+| `oqf_version` | string | **yes** | Any `0.2.x`. |
 | `id` | string | **yes** | Kebab-case. Matches the stimulus's folder name when co-located via `path`. |
 | `title` | string | no | Many stimuli don't need one. |
+| `content` | string \| object | no | The shared prompt, as Markdown. A string holds it inline; `{ "file": "stimulus.md" }` points at a sibling Markdown file instead. Optional — a stimulus that is purely an image or dataset in `assets/` has no prose at all. Same trade-off as [OAF's `content`](/specs/oaf/schema-reference#where-the-prose-lives): prefer the inline form for anything referenced by `stimulus_url`, since a `content_hash` over this document does not cover a separate file. |
 | `authors` | string[] | no | A stimulus can be reused independently of any question. |
 | `license` | string | no | SPDX identifier. |
 | `tags` | string[] | no | |
 | `source` | object | no | Where this stimulus was originally sourced or adapted from, if imported — see [Content provenance](/conformance#content-provenance-for-imported-adapted-content). |
 
-Paired with an optional `stimulus.md` (pure Markdown, same conventions as
-`statement.md`) and an optional `assets/` folder. See
+Paired with an optional `assets/` folder, and — when `content` uses the
+`{file}` form — a `stimulus.md` (pure Markdown, same conventions as
+`statement.md`). See
 [Shared Stimuli](./shared-stimuli) for the full picture — file layout,
 how a question references one, and how a consumer should render several
 questions that share one.
@@ -98,10 +100,10 @@ Any draft-07 compatible JSON Schema validator works. Example using
 [ajv-cli](https://github.com/ajv-validator/ajv-cli):
 
 ```bash
-ajv validate -s schemas/oqf/v0.1.0/question.schema.json \
+ajv validate -s schemas/oqf/v0.2.0/question.schema.json \
   -d "my-question-bank/*/question.json"
 
-ajv validate -s schemas/oqf/v0.1.0/stimulus.schema.json \
+ajv validate -s schemas/oqf/v0.2.0/stimulus.schema.json \
   -d "my-practice-set/stimuli/*/stimulus.json"
 ```
 
@@ -112,3 +114,29 @@ or `stimulus.json` and is intentionally left unvalidated by the core schema
 (`additionalProperties: true`, with a `patternProperties` entry matching the
 `x_` prefix). See [Extensions](./extensions) for the naming convention and
 the extension registry.
+
+## Migrating from v0.1.0
+
+1. Bump `oqf_version` to `"0.2.0"` in every `question.json` and
+   `stimulus.json`.
+2. **`fill_blank` blanks may now list several accepted answers.** Nothing
+   to change — a single `"answer": "O(log n)"` stays valid. Where a blank
+   has more than one correct spelling, use an array and any member
+   matching counts as correct:
+   ```json
+   { "id": "b1", "type": "text", "answer": ["O(log n)", "O(logn)", "Θ(log n)"] }
+   ```
+   This is worth revisiting across an existing bank: under v0.1.0 a blank
+   accepted exactly one spelling, so correct responses were being marked
+   wrong.
+3. **A `stimulus.json` may declare its prose in `content`.** Existing
+   stimuli relying on a sibling `stimulus.md` should add
+   `"content": { "file": "stimulus.md" }` so the prose is named in the
+   document rather than implied by the filesystem — required if you want
+   a `content_hash` to mean anything for a stimulus fetched by URL.
+4. **A `diagram`'s `image` may carry a `content_hash`.** A plain path
+   string stays valid. Use the object form when the question is fetched
+   by URL and the image would otherwise be unverified:
+   ```json
+   { "image": { "file": "assets/neuron.png", "content_hash": "sha256-…" } }
+   ```

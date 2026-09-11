@@ -1,11 +1,20 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "bad-statement",
   "type": "mcq",
   "title": "Bad inline statement",
   "statement": "",
   "type_config": {
-    "options": [{ "id": "a", "content": "A" }, { "id": "b", "content": "B" }],
+    "options": [
+      {
+        "id": "a",
+        "content": "A"
+      },
+      {
+        "id": "b",
+        "content": "B"
+      }
+    ],
     "answer": "a"
   }
 }

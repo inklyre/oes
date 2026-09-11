@@ -1,8 +1,8 @@
 # OVF — Open Video Format
 
-**Version 0.1.0 · Status: Draft · License: CC0 1.0**
+**Version 0.1.0 · Status: Draft · License: CC BY 4.0**
 
-Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
+Part of [OES — Open Education Standards](https://oes.inklyre.org/).
 
 ## Table of contents
 
@@ -21,7 +21,7 @@ Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
 
 OVF (Open Video Format) is an open specification for a single **video
 lesson** — real structured metadata about a video, stored as static files,
-referenced from an [OCF](https://inklyre.github.io/oes/specs/ocf/)
+referenced from an [OCF](https://oes.inklyre.org/specs/ocf/)
 lesson as a first-class content item rather than a bare
 `{type, title, url}` link.
 

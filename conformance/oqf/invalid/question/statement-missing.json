@@ -1,10 +1,19 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "big-o-lookup",
   "type": "mcq",
   "title": "Hash table average lookup time",
   "type_config": {
-    "options": [{ "id": "a", "content": "O(1)" }, { "id": "b", "content": "O(n)" }],
+    "options": [
+      {
+        "id": "a",
+        "content": "O(1)"
+      },
+      {
+        "id": "b",
+        "content": "O(n)"
+      }
+    ],
     "answer": "a"
   }
 }

@@ -130,7 +130,7 @@ required `statement`, either inline or as a `{file}` pointer. This is the
 only file a consumer needs to render and grade a question, aside from the
 statement text itself when `statement` points at a separate file instead
 of holding it directly. See
-[Schema Reference](./schema-reference#questionjson).
+[Schema Reference](./schema-reference#question-json).
 
 ### `statement.md`
 

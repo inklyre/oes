@@ -1,0 +1,11 @@
+{
+  "opf_version": "0.3.0",
+  "id": "addressless",
+  "title": "Entry addressing nothing",
+  "questions": [
+    {
+      "id": "q3",
+      "label": "3"
+    }
+  ]
+}

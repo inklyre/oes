@@ -1,6 +1,11 @@
 {
-  "opf_version": "0.2.0",
+  "opf_version": "0.3.0",
   "id": "quiz",
   "title": "Quiz",
-  "questions": [{ "id": "sorting-stable", "points": 15 }]
+  "questions": [
+    {
+      "id": "sorting-stable",
+      "points": 15
+    }
+  ]
 }

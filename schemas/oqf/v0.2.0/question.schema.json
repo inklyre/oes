@@ -1,0 +1,1459 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://oes.inklyre.org/schemas/oqf/v0.2.0/question.schema.json",
+  "title": "OQF Question",
+  "description": "Schema for question.json, an individual question in the Open Question Format (OQF), version 0.2.0. A question can be referenced from an OPF set (co-located via a relative path, or hosted independently and referenced by URL).",
+  "type": "object",
+  "required": [
+    "oqf_version",
+    "id",
+    "type",
+    "title",
+    "type_config",
+    "statement"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional. Points an editor (e.g. VS Code) at this document's JSON Schema for inline validation/autocomplete. A JSON-tooling convention, not part of the OES content model — an OES parser ignores it like any other unrecognized field."
+    },
+    "oqf_version": {
+      "type": "string",
+      "pattern": "^0\\.2\\.\\d+$",
+      "description": "Any 0.2.x patch release of OQF — see the Versioning & Conformance policy for what's allowed to change in a patch."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Kebab-case. Must match this question's folder name when co-located (referenced via a `path`)."
+    },
+    "authors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "GitHub usernames of the authors. A question can be hosted and reused entirely independently of any set, so it needs its own attribution rather than inheriting the referencing set's."
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier, e.g. \"CC-BY-4.0\". Same reasoning as authors — a standalone/shared question needs its own license, independent of whatever set(s) reference it."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "mcq",
+        "msq",
+        "fill_blank",
+        "code",
+        "match",
+        "order",
+        "numerical",
+        "short_answer",
+        "essay",
+        "diagram",
+        "submission"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": [
+        "easy",
+        "medium",
+        "hard"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "deprecated"
+      ],
+      "description": "Content lifecycle stage. Absent is equivalent to \"published\" — this field exists for a consumer that wants to hide draft/deprecated content or an author's own tooling, not to gate access by itself."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "companies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "time_limit_mins": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Suggested time limit. Authored intent a consuming platform MAY enforce — OQF describes content, not runtime behavior, so this is advisory, not a mechanism OQF itself implements."
+    },
+    "max_attempts": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Suggested attempt limit, same advisory status as time_limit_mins — authored intent a consuming platform MAY enforce, not a mechanism OQF itself implements. Absent means unlimited."
+    },
+    "hints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Ordered least to most revealing."
+    },
+    "explanation": {
+      "type": "string",
+      "description": "Shown to the learner after they attempt the question."
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/reference"
+      },
+      "description": "Cited sources or further reading. Each entry is either a bare URL (the simple case, unchanged from before) or a richer object — needed for a source with no single URL, like a print book (identified by isbn) or a paper (identified by doi)."
+    },
+    "source": {
+      "$ref": "#/definitions/source"
+    },
+    "type_config": {
+      "type": "object",
+      "description": "Type-specific configuration. Shape depends on the value of `type`; see the if/then blocks below."
+    },
+    "statement": {
+      "description": "The question's prose. Always required, and its shape says how to read it: a plain string is the statement itself, inline, as Markdown (figures, LaTeX math, {{blank-id}} markers for fill_blank all work the same as in a file) — the simplest option, and what makes single-file question authoring possible. An object {file} instead points to a sibling Markdown file holding the statement, conventionally statement.md, path relative to this question's own folder — better once the prose is long, reused, or you'd rather edit it as its own file. The field's shape makes the choice self-describing from question.json alone; a validator still can't confirm a referenced file actually exists (see the Versioning & Conformance page's note on cross-file checks — the same limitation `path`/`question_url` already have everywhere else in OES).",
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "object",
+          "required": [
+            "file"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "file": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Path, relative to this question's own folder, to the Markdown file holding the statement. Conventionally \"statement.md\"."
+            }
+          }
+        }
+      ]
+    },
+    "stimulus": {
+      "type": "object",
+      "additionalProperties": true,
+      "oneOf": [
+        {
+          "required": [
+            "path"
+          ]
+        },
+        {
+          "required": [
+            "stimulus_url"
+          ]
+        }
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path, relative to this question's own folder, to a shared stimulus.json — commonly \"../../stimuli/{id}\" for one co-located at the set level. Mutually exclusive with stimulus_url."
+        },
+        "stimulus_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Absolute URL to a stimulus.json hosted in a separate repo, for a stimulus reused across sets. Mutually exclusive with path."
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^sha256-[A-Fa-f0-9]{64}$",
+          "description": "Optional sha256 pin, meaningful only alongside stimulus_url. See the Versioning & Conformance policy's Content Integrity section."
+        }
+      },
+      "description": "A shared prompt (reading passage, diagram, dataset, code snippet) this question is asked about, authored once and referenced by any number of questions rather than duplicated into each one's own statement.md. Entirely optional — most questions have none. See OQF's Shared Stimuli page."
+    },
+    "answer_key": {
+      "type": "object",
+      "additionalProperties": true,
+      "oneOf": [
+        {
+          "required": [
+            "file"
+          ]
+        },
+        {
+          "required": [
+            "url"
+          ]
+        }
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Path, relative to this question's own folder, to a JSON file holding this question's grading-relevant field(s) (e.g. {\"answer\": \"a\"} for an mcq) — kept out of question.json itself. Mutually exclusive with url."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Absolute URL to a privately-hosted answer key — e.g. behind auth on an LMS's own server, never a public repo — for the case where even a co-located private-repo file isn't separation enough. Mutually exclusive with file."
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^sha256-[A-Fa-f0-9]{64}$",
+          "description": "Optional sha256 pin, meaningful mainly alongside url."
+        }
+      },
+      "description": "Entirely optional. Absent (the default): this question is self-practice content, and its type_config carries its own grading fields inline, same as always — no extra ceremony. Present: this question is a graded/secure question, and its correctness-determining field is deliberately absent from type_config (see the per-type note below) — a consumer needing to grade it fetches the answer separately from here, so a learner's client never has to receive it just to render the question. Enforced by the schema (type_config's answer field becomes forbidden, not just optional, when answer_key is set) for every type with a single determinate answer: mcq, msq, numerical, fill_blank, diagram, code, match, and order. short_answer, essay, and submission have no answer_key support since they have no single correct answer to hide — see Answer Visibility on the Versioning & Conformance page."
+    }
+  },
+  "patternProperties": {
+    "^x_[a-z0-9_]+$": {}
+  },
+  "definitions": {
+    "reference": {
+      "description": "A cited source or further-reading pointer.",
+      "oneOf": [
+        {
+          "type": "string",
+          "format": "uri",
+          "description": "Shorthand for a source that's just a URL, nothing more."
+        },
+        {
+          "type": "object",
+          "required": [
+            "title"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "article",
+                "book",
+                "paper",
+                "video",
+                "website",
+                "dataset",
+                "other"
+              ],
+              "default": "website"
+            },
+            "authors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "url": {
+              "type": "string",
+              "format": "uri",
+              "description": "Where to find this source online. Omit entirely for a source with no online location, e.g. a print-only book — isbn/publisher/year identify it instead."
+            },
+            "isbn": {
+              "type": "string",
+              "description": "For type: book. ISBN-10 or ISBN-13, digits and optional hyphens."
+            },
+            "doi": {
+              "type": "string",
+              "description": "For type: paper. Digital Object Identifier, e.g. \"10.1000/xyz123\"."
+            },
+            "publisher": {
+              "type": "string"
+            },
+            "year": {
+              "type": "integer"
+            },
+            "note": {
+              "type": "string",
+              "description": "Why this source is included, e.g. \"primary source for the historical claims in section 2\"."
+            }
+          }
+        }
+      ]
+    },
+    "source": {
+      "description": "Where this question was originally sourced or adapted from, if it wasn't authored directly for OES — e.g. produced by an importer against another platform's question bank. Entirely optional; omit for content authored directly. Distinct from this document's own top-level `license`, which describes this OES document's license, not what it was adapted from — the original may be more restrictive (or simply different) and belongs in `source.license` instead.",
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The original content's own URL — a question's page, a course's syllabus page, etc."
+        },
+        "platform": {
+          "type": "string",
+          "description": "Free-text label for the originating platform or site, e.g. \"Khan Academy\", \"MIT OpenCourseWare\". Deliberately not an enum — OES doesn't hard-code or endorse any specific platform; any importer fills in whatever's accurate."
+        },
+        "license": {
+          "type": "string",
+          "description": "The ORIGINAL content's license or terms of use at the source. Free text, not constrained to SPDX like this document's own `license` field — many platforms' terms of use aren't expressible as a single SPDX identifier."
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date",
+          "description": "When this content was fetched/adapted from the source — provenance, and a signal for how stale this copy might be."
+        },
+        "note": {
+          "type": "string",
+          "description": "Free-text context an importer or author wants to record — adaptation details, attribution requirements, anything not covered by the fields above."
+        }
+      }
+    },
+    "rubric": {
+      "description": "Either a plain string (the simple case) or a structured breakdown into named, independently-pointed criteria.",
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "required": [
+            "criteria"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "criteria": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "name"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "points": {
+                    "type": "number",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "option": {
+      "type": "object",
+      "required": [
+        "id",
+        "content"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "description": "The option's label, as Markdown — full parity with statement's Markdown, not a restricted subset: arbitrary text (bold/italic, lists, code fences, LaTeX math via $...$/$$...$$), any number of images (`![alt](assets/option-a.png)`), or any mix of the two interleaved in the order they should render. Image paths are relative to the question's own folder. See Markdown Conventions."
+        }
+      }
+    },
+    "scored_option": {
+      "description": "An `option`, plus an optional per-option point value — for mcq/msq only, where 'how much is selecting this one worth' is meaningful. Not used by match/order, which have no single per-item correctness value to score.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/option"
+        },
+        {
+          "properties": {
+            "score": {
+              "type": "number",
+              "description": "This option's point contribution when selected — supports partial credit (e.g. 0.5 for a partially-correct choice in msq) and negative-scoring distractors (a penalty for a tempting wrong answer). Absent means the default all-or-nothing behavior: full credit for exactly the option(s) named in `answer`/`answers`, zero for everything else. When present on any option in a question, a consumer SHOULD sum selected options' `score` rather than assume all-or-nothing."
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "mcq"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "options"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "options": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/definitions/scored_option"
+                }
+              },
+              "answer": {
+                "type": "string",
+                "description": "Must match one option's id. Required here unless this question sets a top-level answer_key, in which case it MUST be omitted here and supplied from there instead — see Answer Visibility."
+              },
+              "shuffle_options": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "mcq"
+          }
+        },
+        "not": {
+          "required": [
+            "answer_key"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "required": [
+              "answer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "mcq"
+          }
+        },
+        "required": [
+          "answer_key"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "not": {
+              "required": [
+                "answer"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "msq"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "options"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "options": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/definitions/scored_option"
+                }
+              },
+              "answers": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                },
+                "description": "Each entry must match one option's id. Required here unless this question sets a top-level answer_key, in which case it MUST be omitted here and supplied from there instead — see Answer Visibility."
+              },
+              "shuffle_options": {
+                "type": "boolean",
+                "default": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "msq"
+          }
+        },
+        "not": {
+          "required": [
+            "answer_key"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "required": [
+              "answers"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "msq"
+          }
+        },
+        "required": [
+          "answer_key"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "not": {
+              "required": [
+                "answers"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "fill_blank"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "blanks"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "blanks": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "type"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "answer": {
+                      "oneOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "array",
+                          "minItems": 1,
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "description": "One accepted answer, or a list of them — a response matching ANY member is correct, which is how equivalent spellings of the same answer are handled (\"O(log n)\", \"O(logn)\", \"Θ(log n)\"). `case_sensitive` applies to every member. Required on every blank here unless this question sets a top-level answer_key, in which case it MUST be omitted from every blank here and supplied from there instead, keyed by id — see Answer Visibility."
+                    },
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "text",
+                        "expression",
+                        "number"
+                      ]
+                    },
+                    "case_sensitive": {
+                      "type": "boolean",
+                      "default": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "fill_blank"
+          }
+        },
+        "not": {
+          "required": [
+            "answer_key"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "properties": {
+              "blanks": {
+                "items": {
+                  "required": [
+                    "answer"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "fill_blank"
+          }
+        },
+        "required": [
+          "answer_key"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "properties": {
+              "blanks": {
+                "items": {
+                  "not": {
+                    "required": [
+                      "answer"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "code"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "languages",
+              "test_cases"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "languages": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              },
+              "starter_code": {
+                "type": "object",
+                "description": "Map of language name to starter code, pre-filled in the editor.",
+                "additionalProperties": {
+                  "description": "Either a plain string — the whole editable starter body, the common case — or an object splitting it into a fixed, non-editable prefix/suffix around an editable template, for boilerplate or harness code the learner shouldn't see or touch.",
+                  "oneOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "object",
+                      "required": [
+                        "template"
+                      ],
+                      "additionalProperties": true,
+                      "properties": {
+                        "prefix": {
+                          "type": "string",
+                          "description": "Fixed, non-editable header shown before the editable region — e.g. imports or setup code."
+                        },
+                        "template": {
+                          "type": "string",
+                          "description": "The editable starter body shown in the editor."
+                        },
+                        "suffix": {
+                          "type": "string",
+                          "description": "Fixed, non-editable footer shown after the editable region — e.g. a call to main() or test-harness glue."
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "test_cases": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "input"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "input": {},
+                    "expected": {
+                      "description": "Required on every test case unless this question sets a top-level answer_key, in which case it MUST be omitted for is_hidden test cases (supplied from answer_key instead, keyed by id) but stays required for non-hidden ones, since those are meant to be visible — see Answer Visibility."
+                    },
+                    "is_hidden": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "points": {
+                      "type": "number",
+                      "minimum": 0,
+                      "description": "This test case's weight, for a consumer that wants to compute a proportional score across test cases instead of pure binary pass/fail. Absent means the consumer decides its own weighting (e.g. equal weight per case) — OQF doesn't mandate a scoring policy, this is just optional authored input to one."
+                    },
+                    "time_limit_ms": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Overrides type_config.time_limit_ms for this test case only — for the rare case where one case (e.g. a stress test) genuinely needs more time than the rest."
+                    },
+                    "memory_limit_mb": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "description": "Overrides type_config.memory_limit_mb for this test case only."
+                    }
+                  }
+                }
+              },
+              "solutions": {
+                "type": "object",
+                "description": "Map of language name to a reference solution string. MUST be omitted here if this question sets a top-level answer_key — reference solutions are always fully secret when securing a code question, supplied from answer_key instead.",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "time_limit_ms": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Default execution time limit per test case, in milliseconds, for a judge running the submission. Overridable per test case. Absent means the judge decides its own default — OQF doesn't mandate one."
+              },
+              "memory_limit_mb": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "Default memory limit per test case, in megabytes. Overridable per test case. Absent means the judge decides its own default."
+              },
+              "time_complexity": {
+                "type": "string"
+              },
+              "space_complexity": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "code"
+          }
+        },
+        "not": {
+          "required": [
+            "answer_key"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "properties": {
+              "test_cases": {
+                "items": {
+                  "required": [
+                    "expected"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "code"
+          }
+        },
+        "required": [
+          "answer_key"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "not": {
+              "required": [
+                "solutions"
+              ]
+            },
+            "properties": {
+              "test_cases": {
+                "items": {
+                  "if": {
+                    "properties": {
+                      "is_hidden": {
+                        "const": true
+                      }
+                    }
+                  },
+                  "then": {
+                    "not": {
+                      "required": [
+                        "expected"
+                      ]
+                    }
+                  },
+                  "else": {
+                    "required": [
+                      "expected"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "match"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "left",
+              "right"
+            ],
+            "additionalProperties": true,
+            "description": "Public: the two columns, each an independent id-keyed list of Markdown-content items — revealing them reveals nothing about which left pairs with which right. right MAY have more items than left (unmatched distractors); it MUST NOT have fewer than left's matched items.",
+            "properties": {
+              "left": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/definitions/option"
+                },
+                "description": "The left-hand column. Each item's id is referenced from pairs (or from answer_key, when secured)."
+              },
+              "right": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/definitions/option"
+                },
+                "description": "The right-hand column. May include ids never referenced by any pair, as unmatched distractors."
+              },
+              "pairs": {
+                "type": "array",
+                "minItems": 2,
+                "description": "The correct associations: {left_id, right_id}, each an id from left/right above. Required here unless this question sets a top-level answer_key, in which case it MUST be omitted here and supplied from there instead, in the same shape — see Answer Visibility. left_id/right_id MUST reference real ids in left/right — not enforceable by schema alone.",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "left_id",
+                    "right_id"
+                  ],
+                  "properties": {
+                    "left_id": {
+                      "type": "string"
+                    },
+                    "right_id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "shuffle": {
+                "type": "boolean",
+                "default": true,
+                "description": "If true, a renderer should present right in random order — safe to do freely, since correctness is keyed by id, not position."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "match"
+          }
+        },
+        "not": {
+          "required": [
+            "answer_key"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "required": [
+              "pairs"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "match"
+          }
+        },
+        "required": [
+          "answer_key"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "not": {
+              "required": [
+                "pairs"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "order"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "items"
+            ],
+            "additionalProperties": true,
+            "description": "Public: an id-keyed list of Markdown-content items. items MAY be stored in any order (correct, scrambled, or arbitrary) — its order carries no meaning by itself; only correct_order does. This is deliberate: it means revealing items never reveals the answer, regardless of what order they happen to be authored in or whether a consumer remembers to reshuffle for display.",
+            "properties": {
+              "items": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/definitions/option"
+                }
+              },
+              "correct_order": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "type": "string"
+                },
+                "description": "The ids from items, in correct sequence. Required here unless this question sets a top-level answer_key, in which case it MUST be omitted here and supplied from there instead, in the same shape — see Answer Visibility. MUST reference every id in items exactly once — not enforceable by schema alone."
+              },
+              "shuffle": {
+                "type": "boolean",
+                "default": true,
+                "description": "If true, a renderer should present items in random order — safe to do freely, since correctness is keyed by id, not position."
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "order"
+          }
+        },
+        "not": {
+          "required": [
+            "answer_key"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "required": [
+              "correct_order"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "order"
+          }
+        },
+        "required": [
+          "answer_key"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "not": {
+              "required": [
+                "correct_order"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "numerical"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "answer": {
+                "type": "number",
+                "description": "Required here unless this question sets a top-level answer_key, in which case it MUST be omitted here and supplied from there instead — see Answer Visibility."
+              },
+              "tolerance": {
+                "type": "number",
+                "minimum": 0,
+                "default": 0,
+                "description": "Acceptable deviation from `answer`, interpreted per `tolerance_type` — an absolute amount (default) or a fraction of `answer`'s magnitude."
+              },
+              "tolerance_type": {
+                "type": "string",
+                "enum": [
+                  "absolute",
+                  "percentage"
+                ],
+                "default": "absolute",
+                "description": "\"absolute\": a response within answer ± tolerance is correct, regardless of answer's magnitude. \"percentage\": a response within answer ± (tolerance/100 * |answer|) is correct — tolerance is then a percentage, e.g. tolerance: 1 means ±1%. Use percentage when the correct answer's magnitude varies a lot across similar questions and a fixed absolute margin wouldn't scale (e.g. an absolute tolerance of 10 is far too tight for an answer near 1,500,000 and far too loose for an answer near 5)."
+              },
+              "unit": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "numerical"
+          }
+        },
+        "not": {
+          "required": [
+            "answer_key"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "required": [
+              "answer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "numerical"
+          }
+        },
+        "required": [
+          "answer_key"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "not": {
+              "required": [
+                "answer"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "short_answer"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "grading"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "max_words": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "grading": {
+                "type": "string",
+                "enum": [
+                  "manual"
+                ]
+              },
+              "rubric": {
+                "$ref": "#/definitions/rubric"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "essay"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "grading"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "min_words": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "max_words": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "grading": {
+                "type": "string",
+                "enum": [
+                  "manual"
+                ]
+              },
+              "rubric": {
+                "$ref": "#/definitions/rubric"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "submission"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "description": "For a deliverable-based question — a project, capstone, or portfolio piece — where the learner submits a file, a URL, or a link to a git repo rather than answering inline. Always manually graded; grading workflow (peer review, due dates, group submissions) is a consumer/LMS policy concern, not part of this content.",
+            "required": [
+              "formats",
+              "grading"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "formats": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "file",
+                    "url",
+                    "git_repo"
+                  ]
+                },
+                "description": "Which submission format(s) are accepted. A learner submitting via \"url\" or \"git_repo\" provides a link; \"file\" means an actual upload, constrained by max_file_size_mb/allowed_file_types below."
+              },
+              "max_file_size_mb": {
+                "type": "number",
+                "minimum": 0,
+                "description": "Only meaningful when \"file\" is an accepted format."
+              },
+              "allowed_file_types": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "File extensions or MIME patterns accepted, e.g. [\"pdf\", \"zip\"]. Only meaningful when \"file\" is an accepted format."
+              },
+              "grading": {
+                "type": "string",
+                "enum": [
+                  "manual"
+                ]
+              },
+              "rubric": {
+                "$ref": "#/definitions/rubric"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "diagram"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "type": "object",
+            "required": [
+              "image",
+              "labels"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "image": {
+                "oneOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object",
+                    "required": [
+                      "file"
+                    ],
+                    "additionalProperties": true,
+                    "properties": {
+                      "file": {
+                        "type": "string"
+                      },
+                      "content_hash": {
+                        "type": "string",
+                        "pattern": "^sha256-[A-Fa-f0-9]{64}$"
+                      }
+                    }
+                  }
+                ],
+                "description": "Path, relative to the question's folder, to the image asset. May instead be an object carrying that path plus a content_hash, so a question fetched by URL can verify the image it depends on — without it the image is resolved relative to that URL and is entirely unverified. See Content Integrity."
+              },
+              "labels": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "position"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "answer": {
+                      "type": "string",
+                      "description": "Required on every label here unless this question sets a top-level answer_key, in which case it MUST be omitted from every label here and supplied from there instead, keyed by id — see Answer Visibility."
+                    },
+                    "position": {
+                      "type": "object",
+                      "required": [
+                        "x",
+                        "y"
+                      ],
+                      "description": "Percentage-based coordinates (0-100) from the top-left of the image.",
+                      "properties": {
+                        "x": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        },
+                        "y": {
+                          "type": "number",
+                          "minimum": 0,
+                          "maximum": 100
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "diagram"
+          }
+        },
+        "not": {
+          "required": [
+            "answer_key"
+          ]
+        }
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "properties": {
+              "labels": {
+                "items": {
+                  "required": [
+                    "answer"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "diagram"
+          }
+        },
+        "required": [
+          "answer_key"
+        ]
+      },
+      "then": {
+        "properties": {
+          "type_config": {
+            "properties": {
+              "labels": {
+                "items": {
+                  "not": {
+                    "required": [
+                      "answer"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

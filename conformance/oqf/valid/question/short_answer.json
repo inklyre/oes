@@ -1,5 +1,5 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "why-hash-tables",
   "type": "short_answer",
   "title": "Why does a hash table give O(1) average lookup?",

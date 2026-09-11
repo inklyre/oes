@@ -1,8 +1,8 @@
 # OQF — Open Question Format
 
-**Version 0.1.0 · Status: Draft · License: CC0 1.0**
+**Version 0.1.0 · Status: Draft · License: CC BY 4.0**
 
-Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
+Part of [OES — Open Education Standards](https://oes.inklyre.org/).
 
 ## Table of contents
 
@@ -24,7 +24,7 @@ OQF (Open Question Format) is an open specification for a single question
 essay prompt, or any of the 11 supported types — stored as static files. A
 question is the smallest unit of practice content in OES, designed to be
 referenced from more than one place: co-located alongside the
-[OPF](https://inklyre.github.io/oes/specs/opf/) set it belongs to (the
+[OPF](https://oes.inklyre.org/specs/opf/) set it belongs to (the
 common case), or hosted independently as a standalone repo / shared
 question bank that many sets reference by URL.
 
@@ -348,5 +348,5 @@ indices of the two numbers that add up to `target`.
 }
 ```
 
-See the [full Examples page](https://inklyre.github.io/oes/specs/oqf/examples)
+See the [full Examples page](https://oes.inklyre.org/specs/oqf/examples)
 on the docs site for every type worked through in full.

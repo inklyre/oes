@@ -1,5 +1,5 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "cap-theorem-essay",
   "type": "essay",
   "title": "Discuss the CAP theorem's implications for distributed database design",

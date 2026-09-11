@@ -49,7 +49,7 @@ describes it.
 
 ```bash
 npx ajv-cli validate \
-  -s https://oes.dev/schemas/orf/v0.1.0/resource.schema.json \
+  -s https://oes.inklyre.org/schemas/orf/v0.1.0/resource.schema.json \
   -d resource.json
 ```
 

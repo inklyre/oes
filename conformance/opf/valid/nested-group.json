@@ -1,0 +1,37 @@
+{
+  "opf_version": "0.3.0",
+  "id": "physics-paper-2",
+  "title": "Physics Paper 2",
+  "questions": [
+    {
+      "id": "q4",
+      "label": "4",
+      "parts": [
+        {
+          "id": "q4a",
+          "label": "a",
+          "parts": [
+            {
+              "id": "q4ai",
+              "label": "i",
+              "path": "questions/derive",
+              "points": 3
+            },
+            {
+              "id": "q4aii",
+              "label": "ii",
+              "path": "questions/apply",
+              "points": 3
+            }
+          ]
+        },
+        {
+          "id": "q4b",
+          "label": "b",
+          "path": "questions/discuss",
+          "points": 6
+        }
+      ]
+    }
+  ]
+}

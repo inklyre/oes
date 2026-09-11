@@ -1,20 +1,37 @@
 {
-  "opf_version": "0.2.0",
+  "opf_version": "0.3.0",
   "id": "mixed-set",
   "title": "Mixed fixed and pooled quiz",
   "questions": [
-    { "id": "intro-q1", "path": "questions/intro-q1.json", "points": 5 },
+    {
+      "id": "intro-q1",
+      "path": "questions/intro-q1.json",
+      "points": 5
+    },
     {
       "id": "warmup-pool",
       "select": 2,
       "shuffle": true,
       "points": 10,
       "from": [
-        { "id": "pool-q1", "path": "questions/pool-q1.json" },
-        { "id": "pool-q2", "path": "questions/pool-q2.json" },
-        { "id": "pool-q3", "path": "questions/pool-q3.json" }
+        {
+          "id": "pool-q1",
+          "path": "questions/pool-q1.json"
+        },
+        {
+          "id": "pool-q2",
+          "path": "questions/pool-q2.json"
+        },
+        {
+          "id": "pool-q3",
+          "path": "questions/pool-q3.json"
+        }
       ]
     },
-    { "id": "closing-q1", "path": "questions/closing-q1.json", "points": 5 }
+    {
+      "id": "closing-q1",
+      "path": "questions/closing-q1.json",
+      "points": 5
+    }
   ]
 }

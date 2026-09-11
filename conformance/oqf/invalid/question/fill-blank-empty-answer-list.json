@@ -1,0 +1,16 @@
+{
+  "oqf_version": "0.2.0",
+  "id": "empty-answers",
+  "type": "fill_blank",
+  "title": "No accepted answer",
+  "statement": "A {{b1}}.",
+  "type_config": {
+    "blanks": [
+      {
+        "id": "b1",
+        "answer": [],
+        "type": "text"
+      }
+    ]
+  }
+}

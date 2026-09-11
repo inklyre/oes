@@ -1,5 +1,5 @@
 {
-  "oqf_version": "0.2.0",
+  "oqf_version": "0.3.0",
   "id": "big-o-lookup",
   "type": "mcq",
   "title": "Hash table average lookup time",

@@ -11,7 +11,7 @@ that's worth doing.
 
 [[toc]]
 
-## `two-sum` — `code`
+## `two-sum` — `code` {#two-sum-code}
 
 ### `statement.md`
 

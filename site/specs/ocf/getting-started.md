@@ -79,7 +79,7 @@ practice set so you can immediately apply what you've learned.
   "title": "My First Course",
   "description": "A minimal OCF course with one module and one lesson.",
   "authors": ["your-github-username"],
-  "license": "CC0-1.0",
+  "license": "CC-BY-4.0",
   "language": "en",
   "level": "beginner",
   "estimated_mins": 30,
@@ -92,10 +92,10 @@ practice set so you can immediately apply what you've learned.
 ## 6. Validate it
 
 ```bash
-ajv validate -s "https://oes.dev/schemas/ocf/v0.3.0/course.schema.json#/definitions/course" -d course.json
-ajv validate -s "https://oes.dev/schemas/ocf/v0.3.0/course.schema.json#/definitions/module" -d modules/intro/module.json
-ajv validate -s "https://oes.dev/schemas/ocf/v0.3.0/course.schema.json#/definitions/lesson" -d modules/intro/lessons/welcome/lesson.json
-ajv validate -s https://oes.dev/schemas/oaf/v0.1.0/article.schema.json -d modules/intro/lessons/welcome/articles/main/article.json
+ajv validate -s "https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json#/definitions/course" -d course.json
+ajv validate -s "https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json#/definitions/module" -d modules/intro/module.json
+ajv validate -s "https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json#/definitions/lesson" -d modules/intro/lessons/welcome/lesson.json
+ajv validate -s https://oes.inklyre.org/schemas/oaf/v0.2.0/article.schema.json -d modules/intro/lessons/welcome/articles/main/article.json
 ```
 
 ## 7. Host it

@@ -1,8 +1,8 @@
 # ORF — Open Resource Format
 
-**Version 0.1.0 · Status: Draft · License: CC0 1.0**
+**Version 0.1.0 · Status: Draft · License: CC BY 4.0**
 
-Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
+Part of [OES — Open Education Standards](https://oes.inklyre.org/).
 
 ## Table of contents
 
@@ -20,10 +20,10 @@ Part of [OES — Open Education Standards](https://inklyre.github.io/oes/).
 
 ORF (Open Resource Format) structures metadata about a single **reference
 document** — a PDF, an ebook, a paper, slides — as a static file,
-referenced from an [OCF](https://inklyre.github.io/oes/specs/ocf/) lesson
+referenced from an [OCF](https://oes.inklyre.org/specs/ocf/) lesson
 as a first-class content item (`type: "resource"`).
 
-ORF is deliberately not [OAF](https://inklyre.github.io/oes/specs/oaf/):
+ORF is deliberately not [OAF](https://oes.inklyre.org/specs/oaf/):
 an OAF article is prose OES owns and renders; an ORF resource is a
 document OES doesn't own or parse into structured content at all — a
 genuine PDF/ebook/paper a learner needs to actually read. Forcing "here's
@@ -81,7 +81,7 @@ my-resource/
 Same mechanism as OVF's video lessons, substituting a document for a
 video: `downloadable` (author-set legal flag) + `local_path` (tooling-set,
 never hand-authored, never committed to the authoring repo). See
-[OVF's own Offline & Portable Packages section](https://inklyre.github.io/oes/specs/ovf/file-structure#offline-portable-packages)
+[OVF's own Offline & Portable Packages section](https://oes.inklyre.org/specs/ovf/file-structure#offline-portable-packages)
 for the full reasoning — it applies here unchanged.
 
 ## 5. Extension Mechanism
@@ -122,6 +122,6 @@ Referenced from an OCF lesson:
 }
 ```
 
-See the [full Examples page](https://inklyre.github.io/oes/specs/orf/examples)
+See the [full Examples page](https://oes.inklyre.org/specs/orf/examples)
 on the docs site for more, including the `downloadable`/`local_path`
 offline-package case.

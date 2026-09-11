@@ -44,7 +44,7 @@ lesson's `items[]` entries (`type: "article"`) choose between the two.
 ### `article.json`
 
 Metadata for the article: title, description, authors, tags, estimated
-reading time. See [Schema Reference](./schema-reference#articlejson).
+reading time. See [Schema Reference](./schema-reference#article-json).
 
 ### `content.md`
 

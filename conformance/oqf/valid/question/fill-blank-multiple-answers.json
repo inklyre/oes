@@ -1,0 +1,21 @@
+{
+  "oqf_version": "0.2.0",
+  "id": "binary-search-complexity",
+  "type": "fill_blank",
+  "title": "Binary search complexity",
+  "statement": "Binary search runs in {{b1}} time.",
+  "type_config": {
+    "blanks": [
+      {
+        "id": "b1",
+        "answer": [
+          "O(log n)",
+          "O(logn)",
+          "Θ(log n)"
+        ],
+        "type": "text",
+        "case_sensitive": false
+      }
+    ]
+  }
+}

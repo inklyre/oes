@@ -11,11 +11,11 @@
 // here means updating those two spots too — nothing checks that
 // automatically today.
 export const CURRENT_SCHEMAS = {
-  oaf: "schemas/oaf/v0.1.0/article.schema.json",
+  oaf: "schemas/oaf/v0.2.0/article.schema.json",
   ocf: "schemas/ocf/v0.3.0/course.schema.json",
-  opf: "schemas/opf/v0.2.0/set.schema.json",
+  opf: "schemas/opf/v0.3.0/set.schema.json",
   ovf: "schemas/ovf/v0.1.0/video.schema.json",
   orf: "schemas/orf/v0.1.0/resource.schema.json",
-  "oqf.question": "schemas/oqf/v0.1.0/question.schema.json",
-  "oqf.stimulus": "schemas/oqf/v0.1.0/stimulus.schema.json",
+  "oqf.question": "schemas/oqf/v0.2.0/question.schema.json",
+  "oqf.stimulus": "schemas/oqf/v0.2.0/stimulus.schema.json",
 };

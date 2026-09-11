@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/ovf/v0.1.0/video.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/ovf/v0.1.0/video.schema.json",
   "title": "OVF Video Lesson",
   "description": "Schema for video.json, an individual video lesson in the Open Video Format (OVF), version 0.1.0. video_url points at wherever the video is actually hosted (YouTube, Vimeo, a self-hosted CDN, etc.) and is always required as the canonical source. A video lesson MAY additionally carry a local_path to a bundled copy of the file, for fully offline/portable packages, when downloadable permits it.",
   "type": "object",

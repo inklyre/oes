@@ -1,0 +1,8 @@
+{
+  "oqf_version": "0.2.0",
+  "id": "reading-passage-1",
+  "title": "A reading passage",
+  "content": {
+    "file": "stimulus.md"
+  }
+}

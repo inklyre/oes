@@ -1,0 +1,32 @@
+{
+  "opf_version": "0.3.0",
+  "id": "essay-choice",
+  "title": "Choose two essays",
+  "questions": [
+    {
+      "id": "section-b",
+      "label": "B",
+      "answer_any": 2,
+      "parts": [
+        {
+          "id": "b1",
+          "label": "a",
+          "path": "questions/essay-1",
+          "points": 20
+        },
+        {
+          "id": "b2",
+          "label": "b",
+          "path": "questions/essay-2",
+          "points": 20
+        },
+        {
+          "id": "b3",
+          "label": "c",
+          "path": "questions/essay-3",
+          "points": 20
+        }
+      ]
+    }
+  ]
+}

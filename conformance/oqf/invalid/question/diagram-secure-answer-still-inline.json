@@ -1,14 +1,23 @@
 {
-  "oqf_version": "0.1.0",
+  "oqf_version": "0.2.0",
   "id": "bst-parts-secure",
   "type": "diagram",
   "title": "Label the parts of this binary search tree (graded)",
   "statement": "Click each labeled point and identify what it represents.",
-  "answer_key": { "file": "answer-key.json" },
+  "answer_key": {
+    "file": "answer-key.json"
+  },
   "type_config": {
     "image": "assets/bst-diagram.png",
     "labels": [
-      { "id": "l1", "answer": "root", "position": { "x": 50, "y": 10 } }
+      {
+        "id": "l1",
+        "answer": "root",
+        "position": {
+          "x": 50,
+          "y": 10
+        }
+      }
     ]
   }
 }

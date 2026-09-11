@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://oes.dev/schemas/oqf/v0.1.0/stimulus.schema.json",
+  "$id": "https://oes.inklyre.org/schemas/oqf/v0.1.0/stimulus.schema.json",
   "title": "OQF Stimulus",
   "description": "Schema for stimulus.json — a shared prompt (reading passage, diagram, code snippet, dataset, etc.) referenced by one or more question.json files via their `stimulus` field, so it's authored once and never duplicated across the questions that share it.",
   "type": "object",

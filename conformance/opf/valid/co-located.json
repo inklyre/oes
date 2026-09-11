@@ -1,11 +1,21 @@
 {
-  "opf_version": "0.2.0",
+  "opf_version": "0.3.0",
   "id": "dsa-fundamentals",
   "title": "DSA Fundamentals",
-  "authors": ["ankit-ksh"],
+  "authors": [
+    "ankit-ksh"
+  ],
   "license": "CC-BY-4.0",
   "questions": [
-    { "id": "two-sum", "path": "questions/two-sum", "points": 25 },
-    { "id": "big-o-lookup", "path": "questions/big-o-lookup", "points": 10 }
+    {
+      "id": "two-sum",
+      "path": "questions/two-sum",
+      "points": 25
+    },
+    {
+      "id": "big-o-lookup",
+      "path": "questions/big-o-lookup",
+      "points": 10
+    }
   ]
 }

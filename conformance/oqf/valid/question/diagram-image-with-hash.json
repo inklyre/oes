@@ -1,0 +1,23 @@
+{
+  "oqf_version": "0.2.0",
+  "id": "neuron-labels",
+  "type": "diagram",
+  "title": "Label the neuron",
+  "statement": "Label each marked structure.",
+  "type_config": {
+    "image": {
+      "file": "assets/neuron.png",
+      "content_hash": "sha256-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "labels": [
+      {
+        "id": "l1",
+        "answer": "axon",
+        "position": {
+          "x": 20,
+          "y": 40
+        }
+      }
+    ]
+  }
+}
