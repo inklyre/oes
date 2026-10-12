@@ -66,6 +66,7 @@ npm run docs:dev       # local dev server with hot reload
 npm run docs:build     # production build, output to site/.vitepress/dist
 npm run docs:preview   # preview the production build locally
 npm run conformance    # validate every fixture in conformance/ against its schema
+npm run check-doc-schema-versions  # every schema URL on the site points at the current version
 ```
 
 ## Proposing a new spec

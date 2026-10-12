@@ -9,7 +9,8 @@
 // SCHEMA_PATHS (what to fetch) and packages/schemas/src/index.ts's
 // import statements (what to bundle). Bumping a schema's current version
 // here means updating those two spots too — nothing checks that
-// automatically today.
+// automatically today. Schema URLs on the docs site *are* checked:
+// check-doc-schema-versions.mjs fails CI on any that this bump left behind.
 export const CURRENT_SCHEMAS = {
   oaf: "schemas/oaf/v0.2.0/article.schema.json",
   ocf: "schemas/ocf/v0.3.0/course.schema.json",

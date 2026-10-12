@@ -145,7 +145,7 @@ npm install -g ajv-cli
 ajv validate -s "schemas/ocf/v0.3.0/course.schema.json#/definitions/course" -d course.json
 ajv validate -s "schemas/ocf/v0.3.0/course.schema.json#/definitions/module" -d "modules/*/module.json"
 ajv validate -s "schemas/ocf/v0.3.0/course.schema.json#/definitions/lesson" -d "modules/*/lessons/*/lesson.json"
-ajv validate -s schemas/oaf/v0.1.0/article.schema.json -d "modules/*/lessons/*/articles/*/article.json"
+ajv validate -s schemas/oaf/v0.2.0/article.schema.json -d "modules/*/lessons/*/articles/*/article.json"
 ajv validate -s schemas/ovf/v0.1.0/video.schema.json -d "modules/*/lessons/*/videos/*/video.json"
 ```
 

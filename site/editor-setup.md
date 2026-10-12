@@ -43,10 +43,10 @@ URL for every OES document type, current as of the versions in this repo:
 | Document | `$schema` URL |
 |---|---|
 | `course.json` / `module.json` / `lesson.json` | `https://oes.inklyre.org/schemas/ocf/v0.3.0/course.schema.json` |
-| `set.json` | `https://oes.inklyre.org/schemas/opf/v0.2.0/set.schema.json` |
-| `question.json` | `https://oes.inklyre.org/schemas/oqf/v0.1.0/question.schema.json` |
-| `stimulus.json` | `https://oes.inklyre.org/schemas/oqf/v0.1.0/stimulus.schema.json` |
-| `article.json` | `https://oes.inklyre.org/schemas/oaf/v0.1.0/article.schema.json` |
+| `set.json` | `https://oes.inklyre.org/schemas/opf/v0.3.0/set.schema.json` |
+| `question.json` | `https://oes.inklyre.org/schemas/oqf/v0.2.0/question.schema.json` |
+| `stimulus.json` | `https://oes.inklyre.org/schemas/oqf/v0.2.0/stimulus.schema.json` |
+| `article.json` | `https://oes.inklyre.org/schemas/oaf/v0.2.0/article.schema.json` |
 | `video.json` | `https://oes.inklyre.org/schemas/ovf/v0.1.0/video.schema.json` |
 | `resource.json` | `https://oes.inklyre.org/schemas/orf/v0.1.0/resource.schema.json` |
 
@@ -65,19 +65,19 @@ instead:
     },
     {
       "fileMatch": ["set.json"],
-      "url": "https://oes.inklyre.org/schemas/opf/v0.2.0/set.schema.json"
+      "url": "https://oes.inklyre.org/schemas/opf/v0.3.0/set.schema.json"
     },
     {
       "fileMatch": ["question.json"],
-      "url": "https://oes.inklyre.org/schemas/oqf/v0.1.0/question.schema.json"
+      "url": "https://oes.inklyre.org/schemas/oqf/v0.2.0/question.schema.json"
     },
     {
       "fileMatch": ["stimulus.json"],
-      "url": "https://oes.inklyre.org/schemas/oqf/v0.1.0/stimulus.schema.json"
+      "url": "https://oes.inklyre.org/schemas/oqf/v0.2.0/stimulus.schema.json"
     },
     {
       "fileMatch": ["article.json"],
-      "url": "https://oes.inklyre.org/schemas/oaf/v0.1.0/article.schema.json"
+      "url": "https://oes.inklyre.org/schemas/oaf/v0.2.0/article.schema.json"
     },
     {
       "fileMatch": ["video.json"],

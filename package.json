@@ -9,7 +9,8 @@
     "docs:build": "vitepress build site",
     "docs:preview": "vitepress preview site",
     "conformance": "node scripts/validate-conformance.mjs",
-    "check-shared-definitions": "node scripts/check-shared-definitions.mjs"
+    "check-shared-definitions": "node scripts/check-shared-definitions.mjs",
+    "check-doc-schema-versions": "node scripts/check-doc-schema-versions.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

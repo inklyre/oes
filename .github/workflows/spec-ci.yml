@@ -36,5 +36,8 @@ jobs:
       - name: Shared schema definitions stay in sync
         run: npm run check-shared-definitions
 
+      - name: Docs site references only current schema versions
+        run: npm run check-doc-schema-versions
+
       - name: Docs site builds clean
         run: npm run docs:build
